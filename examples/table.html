@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="de" data-bs-theme="auto">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Table | AvalynxTable Example</title>
+	<!-- Bootstrap 5.3 -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3/dist/css/bootstrap.min.css" rel="stylesheet">
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3/dist/js/bootstrap.bundle.min.js"></script>
+	<!-- AvalynxTable 0.0.1 -->
+	<link href="/dist/css/avalynx-table.css" rel="stylesheet">
+	<script src="/dist/js/avalynx-table.js"></script>
+	<!-- Example helper -->
+	<link href="css/helper.css" rel="stylesheet">
+	<script src="js/helper.js"></script>
+</head>
+<body>
+
+<div class="container py-5">
+
+	<a class="btn btn-secondary float-end m-3" href="index.html">Back</a>
+	<button id="modeToggle" class="btn btn-primary float-end m-3">Toggle to Dark Mode</button>
+
+	<br/> <br/> <br/> <br/> Please resize the window to see the responsive behavior of the table. <br/> <br/>
+
+	<h1>This is table with breakpoint md</h1>
+	<table class="avalynx-table avalynx-table-md table table-bordered table-striped">
+		<thead>
+		<tr>
+			<th>Test1</th>
+			<th>Test2</th>
+			<th>Test3</th>
+		</tr>
+		</thead>
+		<tbody>
+		<tr>
+			<td>A</td>
+			<td>B</td>
+			<td>C</td>
+		</tr>
+		<tr>
+			<td>D</td>
+			<td>E</td>
+			<td>F</td>
+		</tr>
+		<tr>
+			<td>G</td>
+			<td>H</td>
+			<td>I</td>
+		</tr>
+		<tr>
+			<td>J</td>
+			<td>K</td>
+			<td>L</td>
+		</tr>
+		</tbody>
+	</table>
+
+	<br/><br/>
+
+	<h1>This is a table with breakpoint xl</h1>
+	<table class="avalynx-table avalynx-table-xl table table-bordered table-striped">
+		<thead>
+		<tr>
+			<th>Code</th>
+			<th>Company</th>
+			<th>City</th>
+			<th>CEO</th>
+		</tr>
+		</thead>
+		<tbody>
+		<tr>
+			<td>AAC</td>
+			<td>AUSTRALIAN AGRICULTURAL COMPANY LIMITED.</td>
+			<td>BRISBANE</td>
+			<td>John Doe</td>
+		</tr>
+		<tr>
+			<td>BBN</td>
+			<td>BABY BUNTING GROUP LIMITED</td>
+			<td>MELBOURNE</td>
+			<td>Jane Doe</td>
+		</tbody>
+	</table>
+
+	<script>
+		document.addEventListener('DOMContentLoaded', () => {
+			new AvalynxTable('.avalynx-table');
+		});
+	</script>
+</div>

@@ -1,0 +1,231 @@
+/**
+ * AvalynxTable
+ *
+ * A simple table system for web applications. Based on Bootstrap >=5.3 without any framework dependencies.
+ *
+ * @version 0.0.1
+ * @license MIT
+ * @author https://github.com/avalynx/avalynx-table/graphs/contributors
+ * @website https://github.com/avalynx/
+ * @repository https://github.com/avalynx/avalynx-table.git
+ * @bugs https://github.com/avalynx/avalynx-table/issues
+ */
+
+:root {
+    --avalynx-table-border-color: var(--bs-border-color);
+    --avalynx-table-cell-border-color: var(--bs-border-color);
+    --avalynx-table-cell-padding-left: 35%;
+    --avalynx-table-cell-padding-top: 0.5rem;
+    --avalynx-table-cell-padding-left-inner: 0.5rem;
+    --avalynx-table-cell-padding-right-inner: 1rem;
+    --avalynx-table-cell-before-width: 30%;
+    --avalynx-table-before-content: ": ";
+    --avalynx-table-before-align: left;
+    --avalynx-table-before-weight: bold;
+}
+
+@media only screen and (max-width: 575.98px) {
+    .avalynx-table.table,
+    .avalynx-table thead,
+    .avalynx-table tbody,
+    .avalynx-table th,
+    .avalynx-table td,
+    .avalynx-table tr {
+        display: block;
+    }
+
+    .avalynx-table thead tr {
+        position: absolute;
+        top: -9999px;
+        left: -9999px;
+    }
+
+    .avalynx-table tr {
+        border: 1px solid var(--avalynx-table-border-color);
+    }
+
+    .avalynx-table td {
+        border: none;
+        border-bottom: 1px solid var(--avalynx-table-cell-border-color);
+        position: relative;
+        padding-left: var(--avalynx-table-cell-padding-left);
+        white-space: normal;
+        text-align: left;
+    }
+
+    .avalynx-table td:before {
+        content: attr(avalynx-td-title) var(--avalynx-table-before-content);
+        position: absolute;
+        top: var(--avalynx-table-cell-padding-top);
+        left: var(--avalynx-table-cell-padding-left-inner);
+        width: var(--avalynx-table-cell-before-width);
+        padding-right: var(--avalynx-table-cell-padding-right-inner);
+        white-space: nowrap;
+        text-align: var(--avalynx-table-before-align);
+        font-weight: var(--avalynx-table-before-weight);
+    }
+}
+@media only screen and (max-width: 767.98px) {
+    .avalynx-table-md.table,
+    .avalynx-table-md thead,
+    .avalynx-table-md tbody,
+    .avalynx-table-md th,
+    .avalynx-table-md td,
+    .avalynx-table-md tr {
+        display: block;
+    }
+
+    .avalynx-table-md thead tr {
+        position: absolute;
+        top: -9999px;
+        left: -9999px;
+    }
+
+    .avalynx-table-md tr {
+        border: 1px solid var(--avalynx-table-border-color);
+    }
+
+    .avalynx-table-md td {
+        border: none;
+        border-bottom: 1px solid var(--avalynx-table-cell-border-color);
+        position: relative;
+        padding-left: var(--avalynx-table-cell-padding-left);
+        white-space: normal;
+        text-align: left;
+    }
+
+    .avalynx-table-md td:before {
+        content: attr(avalynx-td-title) var(--avalynx-table-before-content);
+        position: absolute;
+        top: var(--avalynx-table-cell-padding-top);
+        left: var(--avalynx-table-cell-padding-left-inner);
+        width: var(--avalynx-table-cell-before-width);
+        padding-right: var(--avalynx-table-cell-padding-right-inner);
+        white-space: nowrap;
+        text-align: var(--avalynx-table-before-align);
+        font-weight: var(--avalynx-table-before-weight);
+    }
+}
+@media only screen and (max-width: 991.98px) {
+    .avalynx-table-lg.table,
+    .avalynx-table-lg thead,
+    .avalynx-table-lg tbody,
+    .avalynx-table-lg th,
+    .avalynx-table-lg td,
+    .avalynx-table-lg tr {
+        display: block;
+    }
+
+    .avalynx-table-lg thead tr {
+        position: absolute;
+        top: -9999px;
+        left: -9999px;
+    }
+
+    .avalynx-table-lg tr {
+        border: 1px solid var(--avalynx-table-border-color);
+    }
+
+    .avalynx-table-lg td {
+        border: none;
+        border-bottom: 1px solid var(--avalynx-table-cell-border-color);
+        position: relative;
+        padding-left: var(--avalynx-table-cell-padding-left);
+        white-space: normal;
+        text-align: left;
+    }
+
+    .avalynx-table-lg td:before {
+        content: attr(avalynx-td-title) var(--avalynx-table-before-content);
+        position: absolute;
+        top: var(--avalynx-table-cell-padding-top);
+        left: var(--avalynx-table-cell-padding-left-inner);
+        width: var(--avalynx-table-cell-before-width);
+        padding-right: var(--avalynx-table-cell-padding-right-inner);
+        white-space: nowrap;
+        text-align: var(--avalynx-table-before-align);
+        font-weight: var(--avalynx-table-before-weight);
+    }
+}
+@media only screen and (max-width: 1199.98px) {
+    .avalynx-table-xl.table,
+    .avalynx-table-xl thead,
+    .avalynx-table-xl tbody,
+    .avalynx-table-xl th,
+    .avalynx-table-xl td,
+    .avalynx-table-xl tr {
+        display: block;
+    }
+
+    .avalynx-table-xl thead tr {
+        position: absolute;
+        top: -9999px;
+        left: -9999px;
+    }
+
+    .avalynx-table-xl tr {
+        border: 1px solid var(--avalynx-table-border-color);
+    }
+
+    .avalynx-table-xl td {
+        border: none;
+        border-bottom: 1px solid var(--avalynx-table-cell-border-color);
+        position: relative;
+        padding-left: var(--avalynx-table-cell-padding-left);
+        white-space: normal;
+        text-align: left;
+    }
+
+    .avalynx-table-xl td:before {
+        content: attr(avalynx-td-title) var(--avalynx-table-before-content);
+        position: absolute;
+        top: var(--avalynx-table-cell-padding-top);
+        left: var(--avalynx-table-cell-padding-left-inner);
+        width: var(--avalynx-table-cell-before-width);
+        padding-right: var(--avalynx-table-cell-padding-right-inner);
+        white-space: nowrap;
+        text-align: var(--avalynx-table-before-align);
+        font-weight: var(--avalynx-table-before-weight);
+    }
+}
+@media only screen and (max-width: 1399.98px) {
+    .avalynx-table-xxl.table,
+    .avalynx-table-xxl thead,
+    .avalynx-table-xxl tbody,
+    .avalynx-table-xxl th,
+    .avalynx-table-xxl td,
+    .avalynx-table-xxl tr {
+        display: block;
+    }
+
+    .avalynx-table-xxl thead tr {
+        position: absolute;
+        top: -9999px;
+        left: -9999px;
+    }
+
+    .avalynx-table-xxl tr {
+        border: 1px solid var(--avalynx-table-border-color);
+    }
+
+    .avalynx-table-xxl td {
+        border: none;
+        border-bottom: 1px solid var(--avalynx-table-cell-border-color);
+        position: relative;
+        padding-left: var(--avalynx-table-cell-padding-left);
+        white-space: normal;
+        text-align: left;
+    }
+
+    .avalynx-table-xxl td:before {
+        content: attr(avalynx-td-title) var(--avalynx-table-before-content);
+        position: absolute;
+        top: var(--avalynx-table-cell-padding-top);
+        left: var(--avalynx-table-cell-padding-left-inner);
+        width: var(--avalynx-table-cell-before-width);
+        padding-right: var(--avalynx-table-cell-padding-right-inner);
+        white-space: nowrap;
+        text-align: var(--avalynx-table-before-align);
+        font-weight: var(--avalynx-table-before-weight);
+    }
+}
