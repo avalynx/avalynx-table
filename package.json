@@ -40,8 +40,7 @@
     "test": "jest"
   },
   "dependencies": {
-    "bootstrap": ">=5.3",
-    "util": "^0.12.5"
+    "bootstrap": ">=5.3"
   },
   "devDependencies": {
     "@babel/core": "^7",
