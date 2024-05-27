@@ -1,5 +1,4 @@
 module.exports = {
-    setupFiles: ['./jest.setup.js'],
     testEnvironment: 'jsdom',
     testEnvironmentOptions: {
         html: '<html lang="en"><body></body></html>',
