@@ -109,7 +109,7 @@ new AvalynxTable('.avalynx-table');
 
 AvalynxTable allows the following options for customization:
 
-- `selector`: A custom selector for targeting tables within the DOM (default: `.avalynx-table`).
+- `selector`: (string) The selector to use for targeting tables within the DOM (default: `.avalynx-table`)
 - `options`: An object containing the following keys: (**coming soon**)
 
 ## Contributing
