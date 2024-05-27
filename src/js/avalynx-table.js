@@ -3,7 +3,7 @@
  *
  * A simple table system for web applications. Based on Bootstrap >=5.3 without any framework dependencies.
  *
- * @version 0.0.1
+ * @version 0.0.2
  * @license MIT
  * @author https://github.com/avalynx/avalynx-table/graphs/contributors
  * @website https://github.com/avalynx/
@@ -19,18 +19,16 @@ class AvalynxTable {
 		if (!selector) {
 			selector = '.avalynx-table';
 		}
-
 		if (!selector.startsWith('.') && !selector.startsWith('#')) {
 			selector = '.' + selector;
 		}
-
 		this.tables = document.querySelectorAll(selector);
-		this.init();
+        this.tables.forEach(table => this.init(table));
 	}
 
-	init() {
-		this.tables.forEach(table => this.enhanceTable(table));
-	}
+    init(table) {
+        this.enhanceTable(table);
+    }
 
 	enhanceTable(table) {
 		const headers = table.querySelectorAll('thead th');
