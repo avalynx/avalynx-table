@@ -15,32 +15,35 @@
  */
 
 class AvalynxTable {
-	constructor(selector, options = {}) {
-		if (!selector) {
-			selector = '.avalynx-table';
-		}
-		if (!selector.startsWith('.') && !selector.startsWith('#')) {
-			selector = '.' + selector;
-		}
-		this.tables = document.querySelectorAll(selector);
+    constructor(selector, options = {}) {
+        if (!selector) {
+            selector = '.avalynx-table';
+        }
+        if (!selector.startsWith('.') && !selector.startsWith('#')) {
+            selector = '.' + selector;
+        }
+        this.tables = document.querySelectorAll(selector);
+        if (this.tables.length === 0) {
+            console.error("AvalynxTable: Table(s) with selector '" + selector + "' not found");
+            return;
+        }
         this.tables.forEach(table => this.init(table));
-		this.init();
-	}
+    }
 
-	init(table) {
-		this.enhanceTable(table);
-	}
+    init(table) {
+        this.enhanceTable(table);
+    }
 
-	enhanceTable(table) {
-		const headers = table.querySelectorAll('thead th');
-		const rows = table.querySelectorAll('tbody tr');
-		rows.forEach(row => {
-			const cells = row.querySelectorAll('td');
-			cells.forEach((cell, index) => {
-				if (headers[index]) {
-					cell.setAttribute('avalynx-td-title', headers[index].textContent);
-				}
-			});
-		});
-	}
+    enhanceTable(table) {
+        const headers = table.querySelectorAll('thead th');
+        const rows = table.querySelectorAll('tbody tr');
+        rows.forEach(row => {
+            const cells = row.querySelectorAll('td');
+            cells.forEach((cell, index) => {
+                if (headers[index]) {
+                    cell.setAttribute('avalynx-td-title', headers[index].textContent);
+                }
+            });
+        });
+    }
 }
