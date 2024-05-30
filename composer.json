@@ -1,0 +1,30 @@
+{
+    "name": "avalynx/avalynx-table",
+    "description": "AvalynxTable is a simple table system for web applications. Based on Bootstrap >=5.3 without any framework dependencies.",
+    "keywords": [
+        "avalynx",
+        "table",
+        "bootstrap",
+        "bootstrap5",
+        "component",
+        "stackable",
+        "responsive"
+    ],
+    "homepage": "https://github.com/avalynx/avalynx-table",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Juergen Schwind an the AvalynxTable authors",
+            "homepage": "https://github.com/avalynx/avalynx-table/graphs/contributors"
+        }
+    ],
+    "require": {
+        "twbs/bootstrap": "^5.3"
+    },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/avalynx/avalynx-table.git"
+        }
+    ]
+}

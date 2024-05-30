@@ -10,8 +10,9 @@
  * @repository https://github.com/avalynx/avalynx-table.git
  * @bugs https://github.com/avalynx/avalynx-table/issues
  *
- * @param {string} selector - The selector to find the tables
- * @param {object} options - The options for the table.
+ * @param {string} selector - The selector to use for targeting tables within the DOM (default: '.avalynx-table').
+ * @param {object} options - An object containing the following keys: (*coming soon*)
+ *
  */
 
 class AvalynxTable {

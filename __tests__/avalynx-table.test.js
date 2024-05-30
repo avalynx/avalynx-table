@@ -23,6 +23,10 @@ describe('AvalynxTable', function() {
         document.body.appendChild(table);
     });
 
+    afterEach(() => {
+        document.body.removeChild(div);
+    });
+
     it('should initialize with default selector', () => {
         const table = new AvalynxTable('.avalynx-table');
         console.log(table.tables.length);

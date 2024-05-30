@@ -36,18 +36,18 @@ Then, include AvalynxTable:
 
 Replace `path/to/avalynx-table.js` and `path/to/avalynx-table.css` with the actual path to the files in your project.
 
-## Installation via jsDelivr
+## Installation via jsDelivr ([Link](https://cdn.jsdelivr.net/npm/avalynx-table/))
 
 AvalynxTable is also available via [jsDelivr](https://www.jsdelivr.com/). You can include it in your project like this:
 
 ```html
-<link href="https://cdn.jsdelivr.net/npm/avalynx-table/dist/avalynx-table.css" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/avalynx-table/dist/avalynx-table.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/avalynx-table@0.0.2/dist/css/avalynx-table.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/avalynx-table@0.0.2/dist/js/avalynx-table.min.js"></script>
 ```
 
 Make sure to also include Bootstrap's JS/CSS in your project to ensure AvalynxTable displays correctly.
 
-## Installation via NPM
+## Installation via NPM ([Link](https://www.npmjs.com/package/avalynx-table))
 
 AvalynxTable is also available as a npm package. You can add it to your project with the following command:
 
@@ -76,6 +76,23 @@ After installing, you can import AvalynxTable into your JavaScript file like thi
 import { AvalynxTable } from 'avalynx-table';
 import 'avalynx-table/dist/css/avalynx-table.min.css';
 ```
+
+Make sure to also include Bootstrap's JS/CSS in your project to ensure AvalynxTable displays correctly.
+
+## Installation via Composer ([Link](https://packagist.org/packages/avalynx/avalynx-table))
+
+AvalynxTable is also available as a Composer package. You can add it to your project with the following command:
+
+```bash
+composer require avalynx/avalynx-table
+```
+
+After installing, you can import AvalynxTable into your HTML file like this:
+
+```html
+<link href="vendor/avalynx/avalynx-table/dist/css/avalynx-table.css" rel="stylesheet">
+<script src="vendor/avalynx/avalynx-table/dist/js/avalynx-table.js"></script>
+``` 
 
 Make sure to also include Bootstrap's JS/CSS in your project to ensure AvalynxTable displays correctly.
 
@@ -109,7 +126,7 @@ new AvalynxTable('.avalynx-table');
 
 AvalynxTable allows the following options for customization:
 
-- `selector`: (string) The selector to use for targeting tables within the DOM (default: `.avalynx-table`)
+- `selector`: (string) The selector to use for targeting tables within the DOM (default: `'.avalynx-table'`).
 - `options`: An object containing the following keys: (**coming soon**)
 
 ## Contributing
