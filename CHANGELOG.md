@@ -1,5 +1,8 @@
 # AvalynxTable Changelog
 
+## 0.0.4
+- [x] assetscomposer.json added
+
 ## 0.0.3
 - [x] optimizations in the project / composer added
 

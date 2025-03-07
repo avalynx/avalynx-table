@@ -41,8 +41,8 @@ Replace `path/to/avalynx-table.js` and `path/to/avalynx-table.css` with the actu
 AvalynxTable is also available via [jsDelivr](https://www.jsdelivr.com/). You can include it in your project like this:
 
 ```html
-<link href="https://cdn.jsdelivr.net/npm/avalynx-table@0.0.3/dist/css/avalynx-table.min.css" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/avalynx-table@0.0.3/dist/js/avalynx-table.min.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/avalynx-table@0.0.4/dist/css/avalynx-table.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/avalynx-table@0.0.4/dist/js/avalynx-table.min.js"></script>
 ```
 
 Make sure to also include Bootstrap's JS/CSS in your project to ensure AvalynxTable displays correctly.
