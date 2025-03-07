@@ -1,0 +1,12 @@
+{
+  "name": "avalynx/avalynx-table",
+  "files": [
+    "dist/css/avalynx-table.css",
+    "dist/js/avalynx-table.esm.js",
+    "dist/js/avalynx-table.js"
+  ],
+  "files-dev": [
+    "src/css/avalynx-table.css",
+    "src/js/avalynx-table.js"
+  ]
+}
