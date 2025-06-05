@@ -2,7 +2,7 @@
   "name": "avalynx-table",
   "title": "AvalynxTable",
   "description": "AvalynxTable is a simple table system for web applications. Based on Bootstrap >=5.3 without any framework dependencies.",
-  "version": "0.0.4",
+  "version": "1.0.0",
   "license": "MIT",
   "main": "dist/js/avalynx-table.js",
   "module": "dist/js/avalynx-table.esm.js",

@@ -41,8 +41,8 @@ Replace `path/to/avalynx-table.js` and `path/to/avalynx-table.css` with the actu
 AvalynxTable is also available via [jsDelivr](https://www.jsdelivr.com/). You can include it in your project like this:
 
 ```html
-<link href="https://cdn.jsdelivr.net/npm/avalynx-table@0.0.4/dist/css/avalynx-table.min.css" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/avalynx-table@0.0.4/dist/js/avalynx-table.min.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/avalynx-table@1.0.0/dist/css/avalynx-table.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/avalynx-table@1.0.0/dist/js/avalynx-table.min.js"></script>
 ```
 
 Make sure to also include Bootstrap's JS/CSS in your project to ensure AvalynxTable displays correctly.
@@ -75,6 +75,17 @@ After installing, you can import AvalynxTable into your JavaScript file like thi
 ```javascript
 import { AvalynxTable } from 'avalynx-table';
 import 'avalynx-table/dist/css/avalynx-table.min.css';
+```
+
+Make sure to also include Bootstrap's JS/CSS in your project to ensure AvalynxTable displays correctly.
+
+## Installation via Symfony AssetComposer
+
+More information about the Symfony AssetComposer Bundle can be found [here](https://github.com/jbsnewmedia/asset-composer-bundle).
+
+```twig
+{% do addAssetComposer('avalynx/avalynx-table/dist/css/avalynx-table.css') %}
+{% do addAssetComposer('avalynx/avalynx-table/dist/js/avalynx-table.js') %}
 ```
 
 Make sure to also include Bootstrap's JS/CSS in your project to ensure AvalynxTable displays correctly.
