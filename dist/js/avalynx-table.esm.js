@@ -3,7 +3,7 @@
  *
  * A simple table system for web applications. Based on Bootstrap >=5.3 without any framework dependencies.
  *
- * @version 1.0.0
+ * @version 1.0.1
  * @license MIT
  * @author https://github.com/avalynx/avalynx-table/graphs/contributors
  * @website https://github.com/avalynx/
@@ -14,6 +14,8 @@
  * @param {object} options - An object containing the following keys: (*coming soon*)
  *
  */
+
+import * as bootstrap from 'bootstrap';
 
 export class AvalynxTable {
     constructor(selector, options = {}) {
@@ -27,6 +29,9 @@ export class AvalynxTable {
         if (this.tables.length === 0) {
             console.error("AvalynxTable: Table(s) with selector '" + selector + "' not found");
             return;
+        }
+        if (options === null || typeof options !== 'object') {
+            options = {};
         }
         this.tables.forEach(table => this.init(table));
     }

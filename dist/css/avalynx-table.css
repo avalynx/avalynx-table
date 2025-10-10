@@ -3,7 +3,7 @@
  *
  * A simple table system for web applications. Based on Bootstrap >=5.3 without any framework dependencies.
  *
- * @version 1.0.0
+ * @version 1.0.1
  * @license MIT
  * @author https://github.com/avalynx/avalynx-table/graphs/contributors
  * @website https://github.com/avalynx/
@@ -22,6 +22,8 @@
     --avalynx-table-before-content: ": ";
     --avalynx-table-before-align: left;
     --avalynx-table-before-weight: bold;
+    --avalynx-table-before-style: none;
+    --avalynx-table-before-decoration: normal;
 }
 
 @media only screen and (max-width: 575.98px) {
@@ -63,6 +65,8 @@
         white-space: nowrap;
         text-align: var(--avalynx-table-before-align);
         font-weight: var(--avalynx-table-before-weight);
+        font-style: var(--avalynx-table-before-style);
+        text-decoration: var(--avalynx-table-before-decoration);
     }
 }
 @media only screen and (max-width: 767.98px) {
@@ -104,6 +108,8 @@
         white-space: nowrap;
         text-align: var(--avalynx-table-before-align);
         font-weight: var(--avalynx-table-before-weight);
+        font-style: var(--avalynx-table-before-style);
+        text-decoration: var(--avalynx-table-before-decoration);
     }
 }
 @media only screen and (max-width: 991.98px) {
@@ -145,6 +151,8 @@
         white-space: nowrap;
         text-align: var(--avalynx-table-before-align);
         font-weight: var(--avalynx-table-before-weight);
+        font-style: var(--avalynx-table-before-style);
+        text-decoration: var(--avalynx-table-before-decoration);
     }
 }
 @media only screen and (max-width: 1199.98px) {
@@ -186,6 +194,8 @@
         white-space: nowrap;
         text-align: var(--avalynx-table-before-align);
         font-weight: var(--avalynx-table-before-weight);
+        font-style: var(--avalynx-table-before-style);
+        text-decoration: var(--avalynx-table-before-decoration);
     }
 }
 @media only screen and (max-width: 1399.98px) {
@@ -227,5 +237,7 @@
         white-space: nowrap;
         text-align: var(--avalynx-table-before-align);
         font-weight: var(--avalynx-table-before-weight);
+        font-style: var(--avalynx-table-before-style);
+        text-decoration: var(--avalynx-table-before-decoration);
     }
 }

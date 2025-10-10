@@ -14,6 +14,7 @@ Here's a simple example of how to use AvalynxTable in your project:
 
 * [Overview](https://avalynx-table.jbs-newmedia.de/examples/index.html)
 * [Table](https://avalynx-table.jbs-newmedia.de/examples/table.html)
+* [Table with Custom CSS Variables](https://avalynx-table.jbs-newmedia.de/examples/table-custom-css.html)
 
 ## Installation
 
@@ -41,8 +42,8 @@ Replace `path/to/avalynx-table.js` and `path/to/avalynx-table.css` with the actu
 AvalynxTable is also available via [jsDelivr](https://www.jsdelivr.com/). You can include it in your project like this:
 
 ```html
-<link href="https://cdn.jsdelivr.net/npm/avalynx-table@1.0.0/dist/css/avalynx-table.min.css" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/avalynx-table@1.0.0/dist/js/avalynx-table.min.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/avalynx-table@1.0.1/dist/css/avalynx-table.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/avalynx-table@1.0.1/dist/js/avalynx-table.min.js"></script>
 ```
 
 Make sure to also include Bootstrap's JS/CSS in your project to ensure AvalynxTable displays correctly.
