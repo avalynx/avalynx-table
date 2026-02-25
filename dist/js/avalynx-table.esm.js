@@ -3,7 +3,7 @@
  *
  * A simple table system for web applications. Based on Bootstrap >=5.3 without any framework dependencies.
  *
- * @version 1.0.1
+ * @version 1.0.2
  * @license MIT
  * @author https://github.com/avalynx/avalynx-table/graphs/contributors
  * @website https://github.com/avalynx/
@@ -52,4 +52,9 @@ export class AvalynxTable {
             });
         });
     }
+}
+
+/* istanbul ignore next */
+if (typeof module !== 'undefined' && module.exports) {
+    module.exports = AvalynxTable;
 }

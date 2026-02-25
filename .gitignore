@@ -1,3 +1,4 @@
 /.idea/
+/ai.txt
+/coverage/
 /node_modules/
-/package-lock.json
