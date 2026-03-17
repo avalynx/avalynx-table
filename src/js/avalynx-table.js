@@ -3,7 +3,7 @@
  *
  * A simple table system for web applications. Based on Bootstrap >=5.3 without any framework dependencies.
  *
- * @version 1.0.2
+ * @version 1.0.3
  * @license MIT
  * @author https://github.com/avalynx/avalynx-table/graphs/contributors
  * @website https://github.com/avalynx/
@@ -48,7 +48,7 @@ class AvalynxTable {
                 sortButtonInactive: 'btn btn-sm btn-outline-primary',
                 sortButtonActive: 'btn btn-sm btn-primary'
             },
-            ...(options || {})
+            ...options
         };
 
         const optionLanguage = (this.options.language && typeof this.options.language === 'object')
@@ -160,6 +160,13 @@ class AvalynxTable {
             return;
         }
 
+        const isSortableDefined = Array.isArray(this.options.sortableColumns) && this.options.sortableColumns.length > 0;
+        const isSortingDefined = Array.isArray(this.options.sorting) && this.options.sorting.length > 0;
+
+        if (!isSortableDefined && !isSortingDefined) {
+            return;
+        }
+
         const sortableIndices = this.getSortableIndices(headers);
         if (sortableIndices.length === 0) {
             return;
@@ -196,7 +203,7 @@ class AvalynxTable {
                 return;
             }
 
-            const column = parseInt(header.dataset.avalynxSortIndex || '', 10);
+            const column = parseInt(header.dataset.avalynxSortIndex, 10);
             if (Number.isNaN(column)) {
                 return;
             }
@@ -218,7 +225,7 @@ class AvalynxTable {
 
             event.preventDefault();
 
-            const column = parseInt(header.dataset.avalynxSortIndex || '', 10);
+            const column = parseInt(header.dataset.avalynxSortIndex, 10);
             if (Number.isNaN(column)) {
                 return;
             }
@@ -242,7 +249,7 @@ class AvalynxTable {
         if (!Array.isArray(this.options.sortableColumns) || this.options.sortableColumns.length === 0) {
             return headers
                 .map((_, index) => index)
-                .filter(index => headers[index].dataset.avalynxSortable !== 'false');
+                .filter(index => this.isSortableHeader(headers[index]));
         }
 
         const byId = new Map();
@@ -263,9 +270,17 @@ class AvalynxTable {
         const indices = this.options.sortableColumns
             .map((column) => this.resolveColumnIndex(column, headers, byId, byName))
             .filter(index => index !== -1)
-            .filter(index => headers[index].dataset.avalynxSortable !== 'false');
+            .filter(index => this.isSortableHeader(headers[index]));
 
         return [...new Set(indices)].sort((a, b) => a - b);
+    }
+
+    isSortableHeader(header) {
+        if (!header || header.dataset.avalynxSortable === 'false') {
+            return false;
+        }
+
+        return (header.textContent || '').trim().length > 0;
     }
 
     resolveColumnIndex(column, headers, byId, byName) {
@@ -487,7 +502,7 @@ class AvalynxTable {
             button.type = 'button';
             button.className = this.options.buttonClasses.sortButtonInactive;
             button.dataset.avalynxSortButton = String(columnIndex);
-            button.textContent = header.textContent.trim() || `${this.language.columnLabel} ${columnIndex + 1}`;
+            button.textContent = header.textContent.trim();
 
             button.addEventListener('click', (event) => {
                 const isMultiSort = event.ctrlKey || event.shiftKey || state.stackedMultiMode;
@@ -524,7 +539,7 @@ class AvalynxTable {
         const sortButtons = buttonsContainer.querySelectorAll('[data-avalynx-sort-button]');
         const buttonByColumn = new Map();
         sortButtons.forEach((button) => {
-            const column = parseInt(button.dataset.avalynxSortButton || '', 10);
+            const column = parseInt(button.dataset.avalynxSortButton, 10);
             if (Number.isNaN(column)) {
                 return;
             }

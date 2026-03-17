@@ -342,11 +342,39 @@ describe('AvalynxTable', () => {
                 </table>
             `;
 
-            new AvalynxTable('.avalynx-table');
+            new AvalynxTable('.avalynx-table', { sortableColumns: ['Header 2'] });
 
             const cells = container.querySelectorAll('td');
             expect(cells[0].getAttribute('avalynx-td-title')).toBe('');
             expect(cells[1].getAttribute('avalynx-td-title')).toBe('Header 2');
+
+            const headers = container.querySelectorAll('th');
+            expect(headers[0].classList.contains('avalynx-table-sorting')).toBe(false);
+            expect(headers[0].getAttribute('aria-label')).toBeNull();
+            expect(headers[1].classList.contains('avalynx-table-sorting')).toBe(true);
+        });
+
+        test('should not initialize sorting when sortableColumns and sorting are empty', () => {
+            container.innerHTML = `
+                <table class="avalynx-table">
+                    <thead>
+                        <tr>
+                            <th>Header 1</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Cell 1</td>
+                        </tr>
+                    </tbody>
+                </table>
+            `;
+
+            new AvalynxTable('.avalynx-table');
+
+            const headers = container.querySelectorAll('th');
+            expect(headers[0].classList.contains('avalynx-table-sorting')).toBe(false);
+            expect(headers[0].getAttribute('role')).toBeNull();
         });
 
         test('should handle headers with nested elements', () => {
@@ -709,7 +737,7 @@ describe('AvalynxTable', () => {
                 </table>
             `;
 
-            new AvalynxTable('.avalynx-table', {}, {
+            new AvalynxTable('.avalynx-table', { sortableColumns: [0, 1] }, {
                 sortByLabel: 'Sortiere nach',
                 multiSortLabel: 'Mehrfachsortierung',
                 multiSortOnLabel: 'an',
@@ -741,7 +769,7 @@ describe('AvalynxTable', () => {
                 </table>
             `;
 
-            new AvalynxTable('.avalynx-table', {}, {
+            new AvalynxTable('.avalynx-table', { sortableColumns: [0, 1] }, {
                 sortByLabel: 'Sortiere nach',
                 multiSortLabel: 'Mehrfachsortierung',
                 multiSortOnLabel: 'an',
@@ -777,6 +805,7 @@ describe('AvalynxTable', () => {
             `;
 
             new AvalynxTable('.avalynx-table', {
+                sortableColumns: [0, 1],
                 buttonClasses: {
                     multiSortInactive: 'btn-primary btn-custom-2 avalynx-table-sort-multi-toggle',
                     multiSortActive: 'btn-primary btn-custom-3 avalynx-table-sort-multi-toggle active'
@@ -813,6 +842,7 @@ describe('AvalynxTable', () => {
             `;
 
             new AvalynxTable('.avalynx-table', {
+                sortableColumns: [0, 1],
                 buttonClasses: {
                     sortButtonInactive: 'btn-primary btn-custom-2 avalynx-table-sort-button',
                     sortButtonActive: 'btn-primary btn-custom-3 avalynx-table-sort-button active'
@@ -845,7 +875,7 @@ describe('AvalynxTable', () => {
                 </table>
             `;
 
-            new AvalynxTable('.avalynx-table');
+            new AvalynxTable('.avalynx-table', { sortableColumns: [0, 1] });
 
             const button = container.querySelector('[data-avalynx-sort-button="0"]');
             expect(button).not.toBeNull();
@@ -878,6 +908,7 @@ describe('AvalynxTable', () => {
             `;
 
             new AvalynxTable('.avalynx-table', {
+                sortableColumns: [0, 1],
                 buttonClasses: {
                     multiSearchInactive: 'btn-primary btn-custom-2 avalynx-table-sort-multi-toggle',
                     multiSearchActive: 'btn-primary btn-custom-3 avalynx-table-sort-multi-toggle active'
@@ -910,6 +941,7 @@ describe('AvalynxTable', () => {
             `;
 
             new AvalynxTable('.avalynx-table', {
+                sortableColumns: [0, 1],
                 buttonClasses: {
                     multiSearchInactive: '',
                     multiSearchActive: ''
@@ -1027,6 +1059,94 @@ describe('AvalynxTable', () => {
     });
 
     describe('Coverage branches and edge behaviors', () => {
+        test('should cover setupSorting branch when stackedSorter is false', () => {
+            container.innerHTML = `
+                <table class="avalynx-table">
+                    <thead><tr><th>Name</th></tr></thead>
+                    <tbody>
+                        <tr><td>B</td></tr>
+                        <tr><td>A</td></tr>
+                    </tbody>
+                </table>
+            `;
+
+            const instance = new AvalynxTable('.avalynx-table', {
+                sortableColumns: [0],
+                stackedSorter: false
+            });
+
+            const table = container.querySelector('table');
+            const state = instance.tableStates.get(table);
+
+            expect(state.stackedControls).toBeNull();
+        });
+
+        test('should cover option language object branch, stacked toggle off branch and symbol options spread path', () => {
+            const symbolKey = Symbol('extra');
+
+            container.innerHTML = `
+                <table class="avalynx-table">
+                    <thead><tr><th>Name</th></tr></thead>
+                    <tbody><tr><td>A</td></tr></tbody>
+                </table>
+            `;
+
+            const instance = new AvalynxTable('.avalynx-table', {
+                sortableColumns: [0],
+                stackedMultiSortToggle: false,
+                language: { sortByLabel: 'Sortiere' },
+                [symbolKey]: 'symbol-value'
+            });
+
+            const table = container.querySelector('table');
+            const state = instance.tableStates.get(table);
+
+            expect(instance.language.sortByLabel).toBe('Sortiere');
+            expect(state.stackedControls.querySelector('.avalynx-table-sort-multi-toggle')).toBeNull();
+        });
+
+        test('should cover header handler contains-guard branches and stacked button modifier branches', () => {
+            container.innerHTML = `
+                <table class="avalynx-table">
+                    <thead><tr><th>Name</th></tr></thead>
+                    <tbody>
+                        <tr><td>B</td></tr>
+                        <tr><td>A</td></tr>
+                    </tbody>
+                </table>
+            `;
+
+            const instance = new AvalynxTable('.avalynx-table', { sortableColumns: [0] });
+            const table = container.querySelector('table');
+            const state = instance.tableStates.get(table);
+            const thead = table.querySelector('thead');
+            const header = table.querySelector('th.avalynx-table-sorting');
+            const containsSpy = jest.spyOn(thead, 'contains').mockReturnValue(false);
+
+            state.sortHandler({ target: header, ctrlKey: false, shiftKey: false });
+            header.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter', bubbles: true }));
+            containsSpy.mockRestore();
+
+            const button = container.querySelector('[data-avalynx-sort-button="0"]');
+            button.dispatchEvent(new MouseEvent('click', { bubbles: true, ctrlKey: true }));
+            button.dispatchEvent(new MouseEvent('click', { bubbles: true, shiftKey: true }));
+        });
+
+        test('should cover setupSorting branch when sortable indices are empty and direct isSortableHeader null guard', () => {
+            container.innerHTML = `
+                <table class="avalynx-table">
+                    <thead><tr><th data-avalynx-sortable="false">Only</th></tr></thead>
+                    <tbody><tr><td>A</td></tr></tbody>
+                </table>
+            `;
+
+            const instance = new AvalynxTable('.avalynx-table', { sortableColumns: [0] });
+            const table = container.querySelector('table');
+
+            expect(() => instance.setupSorting(table)).not.toThrow();
+            expect(instance.isSortableHeader(null)).toBe(false);
+        });
+
         test('should return early in setupSorting when headers or sortable columns are missing', () => {
             container.innerHTML = `
                 <table id="t1"><thead></thead><tbody><tr><td>A</td></tr></tbody></table>
@@ -1074,7 +1194,7 @@ describe('AvalynxTable', () => {
                 </table>
             `;
 
-            const instance = new AvalynxTable('.avalynx-table');
+            const instance = new AvalynxTable('.avalynx-table', { sortableColumns: [0] });
             const table = container.querySelector('table');
 
             expect(instance.getCellSortValue(null)).toEqual({ text: '', numeric: false, number: 0 });
@@ -1094,7 +1214,7 @@ describe('AvalynxTable', () => {
             container.innerHTML = `
                 <table class="avalynx-table"><thead><tr><th>Name</th></tr></thead><tbody><tr><td>A</td></tr></tbody></table>
             `;
-            const instance = new AvalynxTable('.avalynx-table');
+            const instance = new AvalynxTable('.avalynx-table', { sortableColumns: [0] });
             const table = container.querySelector('table');
             const state = instance.tableStates.get(table);
 
@@ -1129,7 +1249,7 @@ describe('AvalynxTable', () => {
                 </table>
             `;
 
-            new AvalynxTable('.avalynx-table');
+            new AvalynxTable('.avalynx-table', { sortableColumns: [0] });
             const sortableHeader = container.querySelector('th.avalynx-table-sorting');
             expect(sortableHeader).not.toBeNull();
 
@@ -1204,7 +1324,7 @@ describe('AvalynxTable', () => {
                 </table>
             `;
 
-            const instance = new AvalynxTable('.avalynx-table');
+            const instance = new AvalynxTable('.avalynx-table', { sortableColumns: [0] });
             const table = container.querySelector('table');
             const state = instance.tableStates.get(table);
 
@@ -1230,7 +1350,7 @@ describe('AvalynxTable', () => {
                 </table>
             `;
 
-            const instance = new AvalynxTable('.avalynx-table');
+            const instance = new AvalynxTable('.avalynx-table', { sortableColumns: [0] });
             const spy = jest.spyOn(instance, 'updateStackedSortControlsVisibility');
             instance.handleWindowResize();
             expect(spy).toHaveBeenCalled();
@@ -1245,7 +1365,7 @@ describe('AvalynxTable', () => {
                 </table>
             `;
 
-            new AvalynxTable('.avalynx-table');
+            new AvalynxTable('.avalynx-table', { sortableColumns: [0] });
             const thead = container.querySelector('thead');
             const header = container.querySelector('th.avalynx-table-sorting');
 
@@ -1265,7 +1385,7 @@ describe('AvalynxTable', () => {
                 </table>
             `;
 
-            new AvalynxTable('.avalynx-table');
+            new AvalynxTable('.avalynx-table', { sortableColumns: [0] });
             const thead = container.querySelector('thead');
             const header = container.querySelector('th.avalynx-table-sorting');
 
@@ -1289,7 +1409,7 @@ describe('AvalynxTable', () => {
                 </table>
             `;
 
-            const instance = new AvalynxTable('.avalynx-table');
+            const instance = new AvalynxTable('.avalynx-table', { sortableColumns: [0] });
             const table = container.querySelector('table');
             const state = instance.tableStates.get(table);
 
@@ -1352,7 +1472,7 @@ describe('AvalynxTable', () => {
                 </table>
             `;
 
-            const instance = new AvalynxTable('.avalynx-table');
+            const instance = new AvalynxTable('.avalynx-table', { sortableColumns: [0] });
             const table = container.querySelector('table');
             const state = instance.tableStates.get(table);
             const thead = table.querySelector('thead');
@@ -1379,7 +1499,7 @@ describe('AvalynxTable', () => {
                 </table>
             `;
 
-            const instance = new AvalynxTable('.avalynx-table');
+            const instance = new AvalynxTable('.avalynx-table', { sortableColumns: [0] });
             const table = container.querySelector('table');
             const state = instance.tableStates.get(table);
             const emptyCell = table.querySelector('td');
@@ -1405,7 +1525,7 @@ describe('AvalynxTable', () => {
                 </table>
             `;
 
-            const instance = new AvalynxTable('.avalynx-table', { stackedMultiSortToggle: false });
+            const instance = new AvalynxTable('.avalynx-table', { sortableColumns: [0] });
             const table = container.querySelector('table');
             const state = instance.tableStates.get(table);
 
