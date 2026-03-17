@@ -42,143 +42,67 @@
 	</div>
 	<br/>
 
-	<h1>Table with sorting, selectable sortable columns and defaults</h1>
-	<table id="table-sorting-primary" class="avalynx-table avalynx-table-md table table-bordered table-striped align-middle">
-		<thead>
-		<tr>
-			<th data-avalynx-table-sort-id="id">ID</th>
-			<th data-avalynx-table-sort-id="name">Name</th>
-			<th data-avalynx-table-sort-id="department">Department</th>
-			<th data-avalynx-table-sort-id="salary">Salary</th>
-			<th data-avalynx-sortable="false">Status</th>
-		</tr>
-		</thead>
-		<tbody>
-		<tr>
-			<td data-avalynx-table-sort-value="1007">1007</td>
-			<td>Lea Winter</td>
-			<td>Support</td>
-			<td data-avalynx-table-sort-value="49000">49.000 €</td>
-			<td><span class="badge text-bg-success">Active</span></td>
-		</tr>
-		<tr>
-			<td data-avalynx-table-sort-value="1002">1002</td>
-			<td>Max Mustermann</td>
-			<td>Sales</td>
-			<td data-avalynx-table-sort-value="62000">62.000 €</td>
-			<td><span class="badge text-bg-warning">Vacation</span></td>
-		</tr>
-		<tr>
-			<td data-avalynx-table-sort-value="1011">1011</td>
-			<td>Anna Becker</td>
-			<td>Sales</td>
-			<td data-avalynx-table-sort-value="61000">61.000 €</td>
-			<td><span class="badge text-bg-success">Active</span></td>
-		</tr>
-		<tr>
-			<td data-avalynx-table-sort-value="1001">1001</td>
-			<td>John Doe</td>
-			<td>Support</td>
-			<td data-avalynx-table-sort-value="45000">45.000 €</td>
-			<td><span class="badge text-bg-danger">Sick</span></td>
-		</tr>
-		<tr>
-			<td data-avalynx-table-sort-value="1005">1005</td>
-			<td>Erika Musterfrau</td>
-			<td>Finance</td>
-			<td data-avalynx-table-sort-value="73000">73.000 €</td>
-			<td><span class="badge text-bg-success">Active</span></td>
-		</tr>
-		</tbody>
-	</table>
+	<h1>Table with 5 columns</h1>
+	<div class="row">
+		<div class="col-12">
+			<table id="table-sorting-primary" class="avalynx-table avalynx-table-md table table-bordered table-striped align-middle">
+				<thead>
+				<tr>
+					<th data-avalynx-table-sort-id="id">ID</th>
+					<th data-avalynx-table-sort-id="name">Name</th>
+					<th data-avalynx-table-sort-id="department">Department</th>
+					<th data-avalynx-table-sort-id="salary">Salary</th>
+					<th data-avalynx-sortable="false">Status</th>
+				</tr>
+				</thead>
+				<tbody>
+				<tr>
+					<td data-avalynx-table-sort-value="1007">1007</td>
+					<td>Lea Winter</td>
+					<td>Support</td>
+					<td data-avalynx-table-sort-value="49000">49.000 €</td>
+					<td><span class="badge text-bg-success">Active</span></td>
+				</tr>
+				<tr>
+					<td data-avalynx-table-sort-value="1002">1002</td>
+					<td>Max Mustermann</td>
+					<td>Sales</td>
+					<td data-avalynx-table-sort-value="62000">62.000 €</td>
+					<td><span class="badge text-bg-warning">Vacation</span></td>
+				</tr>
+				<tr>
+					<td data-avalynx-table-sort-value="1011">1011</td>
+					<td>Anna Becker</td>
+					<td>Sales</td>
+					<td data-avalynx-table-sort-value="61000">61.000 €</td>
+					<td><span class="badge text-bg-success">Active</span></td>
+				</tr>
+				<tr>
+					<td data-avalynx-table-sort-value="1001">1001</td>
+					<td>John Doe</td>
+					<td>Support</td>
+					<td data-avalynx-table-sort-value="45000">45.000 €</td>
+					<td><span class="badge text-bg-danger">Sick</span></td>
+				</tr>
+				<tr>
+					<td data-avalynx-table-sort-value="1005">1005</td>
+					<td>Erika Musterfrau</td>
+					<td>Finance</td>
+					<td data-avalynx-table-sort-value="73000">73.000 €</td>
+					<td><span class="badge text-bg-success">Active</span></td>
+				</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
 
-	<br/>
-	<h2>Zweites Beispiel mit 8 Spalten</h2>
-	<table id="table-sorting-secondary" class="avalynx-table avalynx-table-md table table-bordered table-striped align-middle">
-		<thead>
-		<tr>
-			<th data-avalynx-table-sort-id="id2">ID</th>
-			<th data-avalynx-table-sort-id="firstName">First Name</th>
-			<th data-avalynx-table-sort-id="lastName">Last Name</th>
-			<th data-avalynx-table-sort-id="department2">Department</th>
-			<th data-avalynx-table-sort-id="city">City</th>
-			<th data-avalynx-table-sort-id="country">Country</th>
-			<th data-avalynx-table-sort-id="salary2">Salary</th>
-			<th data-avalynx-sortable="false">Actions</th>
-		</tr>
-		</thead>
-		<tbody>
-		<tr>
-			<td data-avalynx-table-sort-value="2001">2001</td>
-			<td>Julia</td>
-			<td>Meier</td>
-			<td>Sales</td>
-			<td>Berlin</td>
-			<td>DE</td>
-			<td data-avalynx-table-sort-value="68000">68.000 €</td>
-			<td><button type="button" class="btn btn-sm btn-primary">View</button></td>
-		</tr>
-		<tr>
-			<td data-avalynx-table-sort-value="2002">2002</td>
-			<td>Tom</td>
-			<td>Fischer</td>
-			<td>Support</td>
-			<td>Hamburg</td>
-			<td>DE</td>
-			<td data-avalynx-table-sort-value="52000">52.000 €</td>
-			<td><button type="button" class="btn btn-sm btn-primary">View</button></td>
-		</tr>
-		<tr>
-			<td data-avalynx-table-sort-value="2003">2003</td>
-			<td>Sara</td>
-			<td>Keller</td>
-			<td>Finance</td>
-			<td>Munich</td>
-			<td>DE</td>
-			<td data-avalynx-table-sort-value="74000">74.000 €</td>
-			<td><button type="button" class="btn btn-sm btn-primary">View</button></td>
-		</tr>
-		<tr>
-			<td data-avalynx-table-sort-value="2004">2004</td>
-			<td>Marc</td>
-			<td>Wagner</td>
-			<td>Sales</td>
-			<td>Cologne</td>
-			<td>DE</td>
-			<td data-avalynx-table-sort-value="70000">70.000 €</td>
-			<td><button type="button" class="btn btn-sm btn-primary">View</button></td>
-		</tr>
-		</tbody>
-	</table>
-
-	<script>
-		document.addEventListener('DOMContentLoaded', () => {
-			new AvalynxTable('#table-sorting-primary', {
-				sortableColumns: ['department', 'name', 'salary'],
-				sorting: [
-					{ column: 'department', dir: 'asc' },
-					{ column: 'name', dir: 'asc' }
-				],
-				stackedSorter: true,
-				stackedMultiSortToggle: true
-			});
-
-			new AvalynxTable('#table-sorting-secondary', {
-				sortableColumns: ['id2', 'lastName', 'department2', 'city', 'country', 'salary2'],
-				sorting: [
-					{ column: 'country', dir: 'asc' },
-					{ column: 'city', dir: 'asc' },
-					{ column: 'lastName', dir: 'asc' }
-				],
-				stackedSorter: true,
-				stackedMultiSortToggle: true
-			});
-		});
-	</script>
-
-	<h3>Table HTML<a class="p-1 float-end btn btn-secondary btn-small" id="copyButtonTable">Copy to clipboard</a></h3>
-	<pre><code class="language-xml" id="tableBlock">
-&lt;table class=&quot;avalynx-table avalynx-table-md table table-bordered table-striped align-middle&quot;&gt;
+	<div class="row mt-3">
+		<div class="col-12">
+			<h4>HTML Source
+				<button class="p-1 float-end btn btn-secondary btn-small" data-copy-target="tableBlock1">Copy to clipboard</button>
+			</h4>
+			<pre><code class="language-xml" id="tableBlock1">
+&lt;table id=&quot;table-sorting-primary&quot; class=&quot;avalynx-table avalynx-table-md table table-bordered table-striped align-middle&quot;&gt;
 	&lt;thead&gt;
 	&lt;tr&gt;
 		&lt;th data-avalynx-table-sort-id=&quot;id&quot;&gt;ID&lt;/th&gt;
@@ -198,9 +122,113 @@
 		&lt;/tr&gt;
 	&lt;/tbody&gt;
 &lt;/table&gt;
-	</code></pre>
+			</code></pre>
+		</div>
+	</div>
 
-	<h3>JavaScript Source<a class="p-1 float-end btn btn-secondary btn-small" id="copyButton">Copy to clipboard</a></h3>
+	<hr class="my-5">
+
+	<h2 class="avalynx-table-center">Table with 8 columns</h2>
+	<div class="row">
+		<div class="col-12">
+			<table id="table-sorting-secondary" class="avalynx-table avalynx-table-md table table-bordered table-striped align-middle">
+				<thead>
+				<tr>
+					<th data-avalynx-table-sort-id="id2">ID</th>
+					<th data-avalynx-table-sort-id="firstName">First Name</th>
+					<th data-avalynx-table-sort-id="lastName">Last Name</th>
+					<th data-avalynx-table-sort-id="department2">Department</th>
+					<th data-avalynx-table-sort-id="city">City</th>
+					<th data-avalynx-table-sort-id="country">Country</th>
+					<th data-avalynx-table-sort-id="salary2">Salary</th>
+					<th class="avalynx-table-center" data-avalynx-sortable="false">Actions</th>
+				</tr>
+				</thead>
+				<tbody>
+				<tr>
+					<td data-avalynx-table-sort-value="2001">2001</td>
+					<td>Julia</td>
+					<td>Meier</td>
+					<td>Sales</td>
+					<td>Berlin</td>
+					<td>DE</td>
+					<td data-avalynx-table-sort-value="68000">68.000 €</td>
+					<td class="avalynx-table-center"><button type="button" class="btn btn-sm btn-primary">View</button></td>
+				</tr>
+				<tr>
+					<td data-avalynx-table-sort-value="2002">2002</td>
+					<td>Tom</td>
+					<td>Fischer</td>
+					<td>Support</td>
+					<td>Hamburg</td>
+					<td>DE</td>
+					<td data-avalynx-table-sort-value="52000">52.000 €</td>
+					<td class="avalynx-table-center"><button type="button" class="btn btn-sm btn-primary">View</button></td>
+				</tr>
+				<tr>
+					<td data-avalynx-table-sort-value="2003">2003</td>
+					<td>Sara</td>
+					<td>Keller</td>
+					<td>Finance</td>
+					<td>Munich</td>
+					<td>DE</td>
+					<td data-avalynx-table-sort-value="74000">74.000 €</td>
+					<td class="avalynx-table-center"><button type="button" class="btn btn-sm btn-primary">View</button></td>
+				</tr>
+				<tr>
+					<td data-avalynx-table-sort-value="2004">2004</td>
+					<td>Marc</td>
+					<td>Wagner</td>
+					<td>Sales</td>
+					<td>Cologne</td>
+					<td>DE</td>
+					<td data-avalynx-table-sort-value="70000">70.000 €</td>
+					<td class="avalynx-table-center"><button type="button" class="btn btn-sm btn-primary">View</button></td>
+				</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+
+	<div class="row mt-3">
+		<div class="col-12">
+			<h4>HTML Source
+				<button class="p-1 float-end btn btn-secondary btn-small" data-copy-target="tableBlock2">Copy to clipboard</button>
+			</h4>
+			<pre><code class="language-xml" id="tableBlock2">
+&lt;table id=&quot;table-sorting-secondary&quot; class=&quot;avalynx-table avalynx-table-md table table-bordered table-striped align-middle&quot;&gt;
+	&lt;thead&gt;
+        &lt;tr&gt;
+            &lt;th data-avalynx-table-sort-id=&quot;id2&quot;&gt;ID&lt;/th&gt;
+            &lt;th data-avalynx-table-sort-id=&quot;firstName&quot;&gt;First Name&lt;/th&gt;
+            &lt;th data-avalynx-table-sort-id=&quot;lastName&quot;&gt;Last Name&lt;/th&gt;
+            &lt;th data-avalynx-table-sort-id=&quot;department2&quot;&gt;Department&lt;/th&gt;
+            &lt;th data-avalynx-table-sort-id=&quot;city&quot;&gt;City&lt;/th&gt;
+            &lt;th data-avalynx-table-sort-id=&quot;country&quot;&gt;Country&lt;/th&gt;
+            &lt;th data-avalynx-table-sort-id=&quot;salary2&quot;&gt;Salary&lt;/th&gt;
+            &lt;th class="avalynx-table-center" data-avalynx-sortable=&quot;false&quot;&gt;Actions&lt;/th&gt;
+        &lt;/tr&gt;
+	&lt;/thead&gt;
+	&lt;tbody&gt;
+		&lt;tr&gt;
+			&lt;td data-avalynx-table-sort-value=&quot;2001&quot;&gt;2001&lt;/td&gt;
+			&lt;td&gt;Julia&lt;/td&gt;
+			&lt;td&gt;Meier&lt;/td&gt;
+			&lt;td&gt;Sales&lt;/td&gt;
+			&lt;td&gt;Berlin&lt;/td&gt;
+			&lt;td&gt;DE&lt;/td&gt;
+			&lt;td data-avalynx-table-sort-value=&quot;68000&quot;&gt;68.000 €&lt;/td&gt;
+			&lt;td class="avalynx-table-center">&lt;button type=&quot;button&quot; class=&quot;btn btn-sm btn-primary&quot;&gt;View&lt;/button&gt;&lt;/td&gt;
+		&lt;/tr&gt;
+	&lt;/tbody&gt;
+&lt;/table&gt;
+			</code></pre>
+		</div>
+	</div>
+
+	<hr class="my-5">
+
+	<h3>JavaScript Source<a class="p-1 float-end btn btn-secondary btn-small" data-copy-target="codeBlock">Copy to clipboard</a></h3>
 	<pre><code class="language-javascript" id="codeBlock">
 document.addEventListener('DOMContentLoaded', () => {
 	new AvalynxTable('#table-sorting-primary', {
@@ -226,24 +254,35 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 	</code></pre>
 
-	<a href="https://github.com/avalynx/avalynx-table" target="_blank" class="btn btn-primary">AvalynxTable on GitHub</a>
-	<a href="https://github.com/avalynx/" target="_blank" class="btn btn-primary">Avalynx on GitHub</a>
+	<footer class="mt-5 pt-4 border-top">
+		<a href="https://github.com/avalynx/avalynx-table" target="_blank" class="btn btn-primary">AvalynxTable on GitHub</a>
+		<a href="https://github.com/avalynx/" target="_blank" class="btn btn-primary">Avalynx on GitHub</a>
+	</footer>
 
 </div>
 
 <script>
 	document.addEventListener('DOMContentLoaded', () => {
-		const copyButtonTable = document.getElementById('copyButtonTable');
-		if (copyButtonTable !== null) {
-			copyButtonTable.addEventListener('click', () => {
-				const code = document.getElementById('tableBlock').innerText;
-				navigator.clipboard.writeText(code).then(() => {
-					copyButtonTable.textContent = 'Copied!';
-				}).catch(err => {
-					console.error('Error copying text: ', err);
-				});
-			});
-		}
+		new AvalynxTable('#table-sorting-primary', {
+			sortableColumns: ['department', 'name', 'salary'],
+			sorting: [
+				{ column: 'department', dir: 'asc' },
+				{ column: 'name', dir: 'asc' }
+			],
+			stackedSorter: true,
+			stackedMultiSortToggle: true
+		});
+
+		new AvalynxTable('#table-sorting-secondary', {
+			sortableColumns: ['id2', 'lastName', 'department2', 'city', 'country', 'salary2'],
+			sorting: [
+				{ column: 'country', dir: 'asc' },
+				{ column: 'city', dir: 'asc' },
+				{ column: 'lastName', dir: 'asc' }
+			],
+			stackedSorter: true,
+			stackedMultiSortToggle: true
+		});
 	});
 </script>
 </body>
