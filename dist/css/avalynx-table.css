@@ -3,7 +3,7 @@
  *
  * A simple table system for web applications. Based on Bootstrap >=5.3 without any framework dependencies.
  *
- * @version 1.0.2
+ * @version 1.0.3
  * @license MIT
  * @author https://github.com/avalynx/avalynx-table/graphs/contributors
  * @website https://github.com/avalynx/
@@ -24,6 +24,105 @@
     --avalynx-table-before-weight: bold;
     --avalynx-table-before-style: none;
     --avalynx-table-before-decoration: normal;
+}
+
+.avalynx-table-center {
+    text-align: center;
+}
+
+.avalynx-table th.avalynx-table-sorting,
+.avalynx-table td.avalynx-table-sorting,
+.avalynx-table th.avalynx-table-sorting-asc,
+.avalynx-table td.avalynx-table-sorting-asc,
+.avalynx-table th.avalynx-table-sorting-desc,
+.avalynx-table td.avalynx-table-sorting-desc,
+.avalynx-table th.avalynx-table-sorting-asc_disabled,
+.avalynx-table td.avalynx-table-sorting-asc_disabled,
+.avalynx-table th.avalynx-table-sorting-desc_disabled,
+.avalynx-table td.avalynx-table-sorting-desc_disabled {
+    cursor: pointer;
+    padding-right: 1.625rem;
+    position: relative;
+}
+
+.avalynx-table th.avalynx-table-sorting:before,
+.avalynx-table th.avalynx-table-sorting:after,
+.avalynx-table td.avalynx-table-sorting:before,
+.avalynx-table td.avalynx-table-sorting:after {
+    font-size: 0.8em;
+    line-height: 0.5625rem;
+    opacity: .125;
+    position: absolute;
+    right: 0.625rem;
+}
+
+.avalynx-table th.avalynx-table-sorting:before,
+.avalynx-table td.avalynx-table-sorting:before,
+.avalynx-table th.avalynx-table-sorting-asc:before,
+.avalynx-table td.avalynx-table-sorting-asc:before,
+.avalynx-table th.avalynx-table-sorting-desc:before,
+.avalynx-table td.avalynx-table-sorting-desc:before {
+    bottom: 50%;
+    content: "▲";
+}
+
+.avalynx-table th.avalynx-table-sorting:after,
+.avalynx-table td.avalynx-table-sorting:after,
+.avalynx-table th.avalynx-table-sorting-asc:after,
+.avalynx-table td.avalynx-table-sorting-asc:after,
+.avalynx-table th.avalynx-table-sorting-desc:after,
+.avalynx-table td.avalynx-table-sorting-desc:after {
+    top: 50%;
+    content: "▼";
+}
+
+.avalynx-table th.avalynx-table-sorting-asc:before,
+.avalynx-table th.avalynx-table-sorting-desc:after,
+.avalynx-table td.avalynx-table-sorting-asc:before,
+.avalynx-table td.avalynx-table-sorting-desc:after {
+    opacity: .7;
+}
+
+.avalynx-table-sort-controls {
+    display: none;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin-bottom: 0.75rem;
+}
+
+.avalynx-table-sort-buttons {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.avalynx-table-sort-button {
+    position: relative;
+    padding-right: 1.625rem;
+}
+
+.avalynx-table-sort-button::before,
+.avalynx-table-sort-button::after {
+    font-size: 0.8em;
+    line-height: 0.5625rem;
+    opacity: .125;
+    position: absolute;
+    right: 0.625rem;
+}
+
+.avalynx-table-sort-button::before {
+    bottom: 50%;
+    content: "▲";
+}
+
+.avalynx-table-sort-button::after {
+    top: 50%;
+    content: "▼";
+}
+
+.avalynx-table-sort-button.avalynx-table-sorting-asc::before,
+.avalynx-table-sort-button.avalynx-table-sorting-desc::after {
+    opacity: .7;
 }
 
 @media only screen and (max-width: 575.98px) {
@@ -68,6 +167,16 @@
         font-style: var(--avalynx-table-before-style);
         text-decoration: var(--avalynx-table-before-decoration);
     }
+
+    .avalynx-table td.avalynx-table-center {
+        text-align: left;
+    }
+
+    .avalynx-table td.avalynx-table-center:before {
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
 }
 @media only screen and (max-width: 767.98px) {
     .avalynx-table-md.table,
@@ -111,6 +220,16 @@
         font-style: var(--avalynx-table-before-style);
         text-decoration: var(--avalynx-table-before-decoration);
     }
+
+    .avalynx-table-md td.avalynx-table-center {
+        text-align: left;
+    }
+
+    .avalynx-table-md td.avalynx-table-center:before {
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
 }
 @media only screen and (max-width: 991.98px) {
     .avalynx-table-lg.table,
@@ -154,6 +273,16 @@
         font-style: var(--avalynx-table-before-style);
         text-decoration: var(--avalynx-table-before-decoration);
     }
+
+    .avalynx-table-lg td.avalynx-table-center {
+        text-align: left;
+    }
+
+    .avalynx-table-lg td.avalynx-table-center:before {
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
 }
 @media only screen and (max-width: 1199.98px) {
     .avalynx-table-xl.table,
@@ -197,6 +326,16 @@
         font-style: var(--avalynx-table-before-style);
         text-decoration: var(--avalynx-table-before-decoration);
     }
+
+    .avalynx-table-xl td.avalynx-table-center {
+        text-align: left;
+    }
+
+    .avalynx-table-xl td.avalynx-table-center:before {
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
 }
 @media only screen and (max-width: 1399.98px) {
     .avalynx-table-xxl.table,
@@ -240,4 +379,14 @@
         font-style: var(--avalynx-table-before-style);
         text-decoration: var(--avalynx-table-before-decoration);
     }
+
+    .avalynx-table-xxl td.avalynx-table-center {
+        text-align: left;
+    }
+
+    .avalynx-table-xxl td.avalynx-table-center:before {
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
 }

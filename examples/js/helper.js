@@ -1,4 +1,22 @@
 document.addEventListener('DOMContentLoaded', () => {
+	const copyFromTarget = (button, targetId) => {
+		const target = document.getElementById(targetId);
+		if (target === null) {
+			return;
+		}
+
+		navigator.clipboard.writeText(target.innerText).then(() => {
+			const originalText = button.dataset.originalText || button.textContent;
+			button.dataset.originalText = originalText;
+			button.textContent = 'Copied!';
+			window.setTimeout(() => {
+				button.textContent = originalText;
+			}, 1200);
+		}).catch(err => {
+			console.error('Error copying text: ', err);
+		});
+	};
+
 	const modeToggle = document.getElementById('modeToggle');
 	if (modeToggle !== null) {
 		modeToggle.addEventListener('click', () => {
@@ -18,12 +36,13 @@ document.addEventListener('DOMContentLoaded', () => {
 	const copyButton = document.getElementById('copyButton');
 	if (copyButton !== null) {
 		copyButton.addEventListener('click', () => {
-			const code = document.getElementById('codeBlock').innerText;
-			navigator.clipboard.writeText(code).then(() => {
-				copyButton.textContent = 'Copied!';
-			}).catch(err => {
-				console.error('Error copying text: ', err);
-			});
+			copyFromTarget(copyButton, 'codeBlock');
 		});
 	}
+
+	document.querySelectorAll('[data-copy-target]').forEach((button) => {
+		button.addEventListener('click', () => {
+			copyFromTarget(button, button.dataset.copyTarget);
+		});
+	});
 });

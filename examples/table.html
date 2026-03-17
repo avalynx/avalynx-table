@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="de" data-bs-theme="auto">
+<html lang="en" data-bs-theme="auto">
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -37,79 +37,171 @@
 	<div class="alert alert-info">Please resize the window to see the responsive behavior of the table.</div>
 	<br/>
 
-	<h1>This is table with breakpoint md</h1>
-	<table class="avalynx-table avalynx-table-md table table-bordered table-striped">
-		<thead>
-		<tr>
-			<th>Test1</th>
-			<th>Test2</th>
-			<th>Test3</th>
-		</tr>
-		</thead>
-		<tbody>
-		<tr>
-			<td>A</td>
-			<td>B</td>
-			<td>C</td>
-		</tr>
-		<tr>
-			<td>D</td>
-			<td>E</td>
-			<td>F</td>
-		</tr>
-		<tr>
-			<td>G</td>
-			<td>H</td>
-			<td>I</td>
-		</tr>
-		<tr>
-			<td>J</td>
-			<td>K</td>
-			<td>L</td>
-		</tr>
-		</tbody>
-	</table>
+	<h1>Table examples with source code</h1>
 
-	<br/><br/>
+	<h2 class="mt-4">Example 1 - Breakpoint md</h2>
+	<div class="row">
+		<div class="col-12">
+			<table class="avalynx-table table-example-md avalynx-table-md table table-bordered table-striped">
+				<thead>
+				<tr>
+					<th>Test1</th>
+					<th>Test2</th>
+					<th>Test3</th>
+				</tr>
+				</thead>
+				<tbody>
+				<tr>
+					<td>A</td>
+					<td>B</td>
+					<td>C</td>
+				</tr>
+				<tr>
+					<td>D</td>
+					<td>E</td>
+					<td>F</td>
+				</tr>
+				<tr>
+					<td>G</td>
+					<td>H</td>
+					<td>I</td>
+				</tr>
+				<tr>
+					<td>J</td>
+					<td>K</td>
+					<td>L</td>
+				</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
 
-	<h1>This is a table with breakpoint xl</h1>
-	<table class="avalynx-table avalynx-table-xl table table-bordered table-striped">
-		<thead>
-		<tr>
-			<th>Code</th>
-			<th>Company</th>
-			<th>City</th>
-			<th>CEO</th>
-		</tr>
-		</thead>
-		<tbody>
-		<tr>
-			<td>AAC</td>
-			<td>AUSTRALIAN AGRICULTURAL COMPANY LIMITED.</td>
-			<td>BRISBANE</td>
-			<td>John Doe</td>
-		</tr>
-		<tr>
-			<td>BBN</td>
-			<td>BABY BUNTING GROUP LIMITED</td>
-			<td>MELBOURNE</td>
-			<td>Jane Doe</td>
-		</tbody>
-	</table>
+	<hr class="my-5">
 
-	<script>
-		document.addEventListener('DOMContentLoaded', () => {
-			new AvalynxTable('.avalynx-table');
-		});
-	</script>
+	<h2>Example 2 - Breakpoint xl</h2>
+	<div class="row">
+		<div class="col-12">
+			<table class="avalynx-table table-example-xl avalynx-table-xl table table-bordered table-striped">
+				<thead>
+				<tr>
+					<th>Code</th>
+					<th>Company</th>
+					<th>City</th>
+					<th>CEO</th>
+				</tr>
+				</thead>
+				<tbody>
+				<tr>
+					<td>AAC</td>
+					<td>AUSTRALIAN AGRICULTURAL COMPANY LIMITED.</td>
+					<td>BRISBANE</td>
+					<td>John Doe</td>
+				</tr>
+				<tr>
+					<td>BBN</td>
+					<td>BABY BUNTING GROUP LIMITED</td>
+					<td>MELBOURNE</td>
+					<td>Jane Doe</td>
+				</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
 
-	<h3>Source of example<a class="p-1 float-end btn btn-secondary btn-small" id="copyButton">Copy to clipboard</a></h3>
-	<pre><code class="language-javascript" id="codeBlock">
+	<hr class="my-5">
+
+	<h2 class="mt-4">Source Code - Example 1</h2>
+	<div class="row mt-3">
+		<div class="col-12">
+			<h4>HTML Source
+				<button class="p-1 float-end btn btn-secondary btn-small" data-copy-target="tableBlockMd">Copy to clipboard</button>
+			</h4>
+			<pre><code class="language-xml" id="tableBlockMd">
+&lt;table class=&quot;avalynx-table avalynx-table-md table table-bordered table-striped&quot;&gt;
+	&lt;thead&gt;
+		&lt;tr&gt;
+			&lt;th&gt;Test1&lt;/th&gt;
+			&lt;th&gt;Test2&lt;/th&gt;
+			&lt;th&gt;Test3&lt;/th&gt;
+		&lt;/tr&gt;
+	&lt;/thead&gt;
+	&lt;tbody&gt;
+		&lt;tr&gt;
+			&lt;td&gt;A&lt;/td&gt;
+			&lt;td&gt;B&lt;/td&gt;
+			&lt;td&gt;C&lt;/td&gt;
+		&lt;/tr&gt;
+	&lt;/tbody&gt;
+&lt;/table&gt;
+			</code></pre>
+		</div>
+	</div>
+
+	<div class="row mt-3">
+		<div class="col-12">
+			<h3>JavaScript Source<a class="p-1 float-end btn btn-secondary btn-small" data-copy-target="codeBlockMd">Copy to clipboard</a></h3>
+			<pre><code class="language-javascript" id="codeBlockMd">
 document.addEventListener('DOMContentLoaded', () => {
-	new AvalynxTable('.avalynx-table');
+	new AvalynxTable('.table-example-md');
 });
-	</code></pre>
+			</code></pre>
+		</div>
+	</div>
 
-	<a href="https://github.com/avalynx/avalynx-table" target="_blank" class="btn btn-primary">AvalynxTable on GitHub</a> <a href="https://github.com/avalynx/" target="_blank" class="btn btn-primary">Avalynx on GitHub</a>
+	<hr class="my-5">
+
+	<h2 class="mt-4">Source Code - Example 2</h2>
+	<div class="row mt-3">
+		<div class="col-12">
+			<h4>HTML Source
+				<button class="p-1 float-end btn btn-secondary btn-small" data-copy-target="tableBlockXl">Copy to clipboard</button>
+			</h4>
+			<pre><code class="language-xml" id="tableBlockXl">
+&lt;table class=&quot;avalynx-table avalynx-table-xl table table-bordered table-striped&quot;&gt;
+	&lt;thead&gt;
+		&lt;tr&gt;
+			&lt;th&gt;Code&lt;/th&gt;
+			&lt;th&gt;Company&lt;/th&gt;
+			&lt;th&gt;City&lt;/th&gt;
+			&lt;th&gt;CEO&lt;/th&gt;
+		&lt;/tr&gt;
+	&lt;/thead&gt;
+	&lt;tbody&gt;
+		&lt;tr&gt;
+			&lt;td&gt;AAC&lt;/td&gt;
+			&lt;td&gt;AUSTRALIAN AGRICULTURAL COMPANY LIMITED.&lt;/td&gt;
+			&lt;td&gt;BRISBANE&lt;/td&gt;
+			&lt;td&gt;John Doe&lt;/td&gt;
+		&lt;/tr&gt;
+	&lt;/tbody&gt;
+&lt;/table&gt;
+			</code></pre>
+		</div>
+	</div>
+
+	<div class="row mt-3">
+		<div class="col-12">
+			<h3>JavaScript Source<a class="p-1 float-end btn btn-secondary btn-small" data-copy-target="codeBlockXl">Copy to clipboard</a></h3>
+			<pre><code class="language-javascript" id="codeBlockXl">
+document.addEventListener('DOMContentLoaded', () => {
+	new AvalynxTable('.table-example-xl');
+});
+			</code></pre>
+		</div>
+	</div>
+
+	<footer class="mt-5 pt-4 border-top">
+		<a href="https://github.com/avalynx/avalynx-table" target="_blank" class="btn btn-primary">AvalynxTable on GitHub</a>
+		<a href="https://github.com/avalynx/" target="_blank" class="btn btn-primary">Avalynx on GitHub</a>
+	</footer>
 
 </div>
+
+<script>
+	document.addEventListener('DOMContentLoaded', () => {
+		new AvalynxTable('.table-example-md');
+		new AvalynxTable('.table-example-xl');
+	});
+</script>
+</body>
+</html>

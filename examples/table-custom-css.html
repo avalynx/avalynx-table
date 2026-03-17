@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="de" data-bs-theme="auto">
+<html lang="en" data-bs-theme="auto">
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -54,85 +54,92 @@
 	<h1>Table with Custom CSS Variables</h1>
 	<p>This table uses custom CSS variable overrides to customize the appearance in responsive mode.</p>
 
-	<table class="avalynx-table avalynx-table-md table table-bordered table-striped">
-		<thead>
-		<tr>
-			<th>Product</th>
-			<th>Category</th>
-			<th>Price</th>
-			<th>Stock</th>
-		</tr>
-		</thead>
-		<tbody>
-		<tr>
-			<td>Laptop</td>
-			<td>Electronics</td>
-			<td>€999.00</td>
-			<td>15</td>
-		</tr>
-		<tr>
-			<td>Smartphone</td>
-			<td>Electronics</td>
-			<td>€599.00</td>
-			<td>32</td>
-		</tr>
-		<tr>
-			<td>Desk Chair</td>
-			<td>Furniture</td>
-			<td>€249.00</td>
-			<td>8</td>
-		</tr>
-		<tr>
-			<td>Notebook</td>
-			<td>Stationery</td>
-			<td>€4.99</td>
-			<td>150</td>
-		</tr>
-		</tbody>
-	</table>
+	<div class="row">
+		<div class="col-12">
+			<table id="table-custom-primary" class="avalynx-table avalynx-table-md table table-bordered table-striped">
+				<thead>
+				<tr>
+					<th>Product</th>
+					<th>Category</th>
+					<th>Price</th>
+					<th>Stock</th>
+				</tr>
+				</thead>
+				<tbody>
+				<tr>
+					<td>Laptop</td>
+					<td>Electronics</td>
+					<td>€999.00</td>
+					<td>15</td>
+				</tr>
+				<tr>
+					<td>Smartphone</td>
+					<td>Electronics</td>
+					<td>€599.00</td>
+					<td>32</td>
+				</tr>
+				<tr>
+					<td>Desk Chair</td>
+					<td>Furniture</td>
+					<td>€249.00</td>
+					<td>8</td>
+				</tr>
+				<tr>
+					<td>Notebook</td>
+					<td>Stationery</td>
+					<td>€4.99</td>
+					<td>150</td>
+				</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
 
-	<br/><br/>
+	<hr class="my-5">
 
 	<h1>Another Table with Custom Styling</h1>
-	<table class="avalynx-table avalynx-table-lg table table-bordered table-striped">
-		<thead>
-		<tr>
-			<th>Employee</th>
-			<th>Department</th>
-			<th>Position</th>
-			<th>Salary</th>
-		</tr>
-		</thead>
-		<tbody>
-		<tr>
-			<td>Anna Schmidt</td>
-			<td>IT</td>
-			<td>Developer</td>
-			<td>€65,000</td>
-		</tr>
-		<tr>
-			<td>Max Müller</td>
-			<td>Sales</td>
-			<td>Manager</td>
-			<td>€55,000</td>
-		</tr>
-		<tr>
-			<td>Lisa Weber</td>
-			<td>HR</td>
-			<td>Specialist</td>
-			<td>€48,000</td>
-		</tr>
-		</tbody>
-	</table>
+	<div class="row">
+		<div class="col-12">
+			<table id="table-custom-secondary" class="avalynx-table avalynx-table-lg table table-bordered table-striped">
+				<thead>
+				<tr>
+					<th>Employee</th>
+					<th>Department</th>
+					<th>Position</th>
+					<th>Salary</th>
+				</tr>
+				</thead>
+				<tbody>
+				<tr>
+					<td>Anna Schmidt</td>
+					<td>IT</td>
+					<td>Developer</td>
+					<td>€65,000</td>
+				</tr>
+				<tr>
+					<td>Max Müller</td>
+					<td>Sales</td>
+					<td>Manager</td>
+					<td>€55,000</td>
+				</tr>
+				<tr>
+					<td>Lisa Weber</td>
+					<td>HR</td>
+					<td>Specialist</td>
+					<td>€48,000</td>
+				</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
 
-	<script>
-		document.addEventListener('DOMContentLoaded', () => {
-			new AvalynxTable('.avalynx-table');
-		});
-	</script>
+	<hr class="my-5">
 
-	<h3>CSS Variables Override<a class="p-1 float-end btn btn-secondary btn-small" id="copyButtonCSS">Copy to clipboard</a></h3>
-	<pre><code class="language-css" id="cssBlock">
+	<h2 class="mt-4">Source Code - CSS Variables Override</h2>
+	<div class="row mt-3">
+		<div class="col-12">
+			<h3>CSS Variables Override<a class="p-1 float-end btn btn-secondary btn-small" data-copy-target="cssBlock">Copy to clipboard</a></h3>
+			<pre><code class="language-css" id="cssBlock">
 :root {
     --avalynx-table-border-color: var(--bs-primary);
     --avalynx-table-cell-border-color: var(--bs-danger);
@@ -143,18 +150,49 @@
     --avalynx-table-before-style: italic;
     --avalynx-table-before-decoration: underline;
 }
-	</code></pre>
+			</code></pre>
+		</div>
+	</div>
 
-	<h3>JavaScript Source<a class="p-1 float-end btn btn-secondary btn-small" id="copyButton">Copy to clipboard</a></h3>
-	<pre><code class="language-javascript" id="codeBlock">
+	<hr class="my-5">
+
+	<h2 class="mt-4">Source Code - JavaScript Example 1</h2>
+	<div class="row mt-3">
+		<div class="col-12">
+			<h3>JavaScript Source<a class="p-1 float-end btn btn-secondary btn-small" data-copy-target="codeBlock1">Copy to clipboard</a></h3>
+			<pre><code class="language-javascript" id="codeBlock1">
 document.addEventListener('DOMContentLoaded', () => {
-	new AvalynxTable('.avalynx-table');
+	new AvalynxTable('#table-custom-primary');
 });
-	</code></pre>
+			</code></pre>
+		</div>
+	</div>
 
-	<a href="https://github.com/avalynx/avalynx-table" target="_blank" class="btn btn-primary">AvalynxTable on GitHub</a> <a href="https://github.com/avalynx/" target="_blank" class="btn btn-primary">Avalynx on GitHub</a>
+	<hr class="my-5">
+
+	<h2 class="mt-4">Source Code - JavaScript Example 2</h2>
+	<div class="row mt-3">
+		<div class="col-12">
+			<h3>JavaScript Source<a class="p-1 float-end btn btn-secondary btn-small" data-copy-target="codeBlock2">Copy to clipboard</a></h3>
+			<pre><code class="language-javascript" id="codeBlock2">
+document.addEventListener('DOMContentLoaded', () => {
+	new AvalynxTable('#table-custom-secondary');
+});
+			</code></pre>
+		</div>
+	</div>
+
+	<footer class="mt-5 pt-4 border-top">
+		<a href="https://github.com/avalynx/avalynx-table" target="_blank" class="btn btn-primary">AvalynxTable on GitHub</a>
+		<a href="https://github.com/avalynx/" target="_blank" class="btn btn-primary">Avalynx on GitHub</a>
+	</footer>
 
 </div>
 
+<script>
+	document.addEventListener('DOMContentLoaded', () => {
+		new AvalynxTable('.avalynx-table');
+	});
+</script>
 </body>
 </html>
