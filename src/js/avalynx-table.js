@@ -536,35 +536,23 @@ class AvalynxTable {
         });
     }
 
-    getStackedBreakpoint(table) {
-        const breakpoints = [
-            { className: 'avalynx-table-xxl', max: 1399.98 },
-            { className: 'avalynx-table-xl', max: 1199.98 },
-            { className: 'avalynx-table-lg', max: 991.98 },
-            { className: 'avalynx-table-md', max: 767.98 },
-            { className: 'avalynx-table', max: 575.98 }
-        ];
-
-        for (const breakpoint of breakpoints) {
-            if (table.classList.contains(breakpoint.className)) {
-                return breakpoint.max;
-            }
-        }
-
-        return null;
-    }
-
     isStacked(table) {
-        const breakpoint = this.getStackedBreakpoint(table);
-        if (breakpoint === null) {
+        const hasStackClass = table.classList.contains('avalynx-table') ||
+            table.classList.contains('avalynx-table-md') ||
+            table.classList.contains('avalynx-table-lg') ||
+            table.classList.contains('avalynx-table-xl') ||
+            table.classList.contains('avalynx-table-xxl');
+
+        if (!hasStackClass || typeof window.getComputedStyle !== 'function') {
             return false;
         }
 
-        if (typeof window.matchMedia !== 'function') {
+        const thead = table.querySelector('thead');
+        if (!thead) {
             return false;
         }
 
-        return window.matchMedia(`(max-width: ${breakpoint}px)`).matches;
+        return window.getComputedStyle(thead).display === 'block';
     }
 
     updateStackedSortControlsVisibility(table, state) {
