@@ -26,6 +26,10 @@
     --avalynx-table-before-decoration: normal;
 }
 
+.avalynx-table-center {
+    text-align: center;
+}
+
 @media only screen and (max-width: 575.98px) {
     .avalynx-table.table,
     .avalynx-table thead,
@@ -68,6 +72,16 @@
         font-style: var(--avalynx-table-before-style);
         text-decoration: var(--avalynx-table-before-decoration);
     }
+
+    .avalynx-table td.avalynx-table-center {
+        text-align: left;
+    }
+
+    .avalynx-table td.avalynx-table-center:before {
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
 }
 @media only screen and (max-width: 767.98px) {
     .avalynx-table-md.table,
@@ -111,6 +125,16 @@
         font-style: var(--avalynx-table-before-style);
         text-decoration: var(--avalynx-table-before-decoration);
     }
+
+    .avalynx-table-md td.avalynx-table-center {
+        text-align: left;
+    }
+
+    .avalynx-table-md td.avalynx-table-center:before {
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
 }
 @media only screen and (max-width: 991.98px) {
     .avalynx-table-lg.table,
@@ -154,6 +178,16 @@
         font-style: var(--avalynx-table-before-style);
         text-decoration: var(--avalynx-table-before-decoration);
     }
+
+    .avalynx-table-lg td.avalynx-table-center {
+        text-align: left;
+    }
+
+    .avalynx-table-lg td.avalynx-table-center:before {
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
 }
 @media only screen and (max-width: 1199.98px) {
     .avalynx-table-xl.table,
@@ -197,6 +231,16 @@
         font-style: var(--avalynx-table-before-style);
         text-decoration: var(--avalynx-table-before-decoration);
     }
+
+    .avalynx-table-xl td.avalynx-table-center {
+        text-align: left;
+    }
+
+    .avalynx-table-xl td.avalynx-table-center:before {
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
 }
 @media only screen and (max-width: 1399.98px) {
     .avalynx-table-xxl.table,
@@ -240,4 +284,14 @@
         font-style: var(--avalynx-table-before-style);
         text-decoration: var(--avalynx-table-before-decoration);
     }
+
+    .avalynx-table-xxl td.avalynx-table-center {
+        text-align: left;
+    }
+
+    .avalynx-table-xxl td.avalynx-table-center:before {
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
 }

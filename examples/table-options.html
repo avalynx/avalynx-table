@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="de" data-bs-theme="auto">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Table with Options | AvalynxTable Example</title>
+
+	<!-- Bootstrap 5.3 -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3/dist/css/bootstrap.min.css" rel="stylesheet">
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3/dist/js/bootstrap.bundle.min.js"></script>
+
+	<!-- Highlight.js 11.9, only for the example -->
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9/build/styles/default.min.css">
+	<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9/build/highlight.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9/build/languages/javascript.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9/build/languages/xml.min.js"></script>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9/build/styles/stackoverflow-light.min.css" id="hljsTheme">
+	<script>hljs.highlightAll();</script>
+
+	<!-- AvalynxTable -->
+	<link href="../src/css/avalynx-table.css" rel="stylesheet">
+	<script src="../src/js/avalynx-table.js"></script>
+
+	<!-- Example helper -->
+	<link href="./css/helper.css" rel="stylesheet">
+	<script src="./js/helper.js"></script>
+</head>
+<body>
+
+<div class="container py-5">
+
+	<a class="btn btn-secondary float-end m-3" href=".">Back</a>
+	<button id="modeToggle" class="btn btn-primary float-end m-3">Toggle to Dark Mode</button>
+
+	<br/>
+	<br/>
+	<br/>
+	<br/>
+	<div class="alert alert-info">Example table with action buttons in the last "Options" column.</div>
+	<br/>
+
+	<h1>Table with options buttons</h1>
+	<table class="avalynx-table avalynx-table-lg table table-bordered table-striped align-middle">
+		<thead>
+		<tr>
+			<th>ID</th>
+			<th>Name</th>
+			<th>Department</th>
+			<th>Email</th>
+			<th class="avalynx-table-center">Options</th>
+		</tr>
+		</thead>
+		<tbody>
+		<tr>
+			<td>1001</td>
+			<td>Max Mustermann</td>
+			<td>Sales</td>
+			<td>max.mustermann@example.com</td>
+			<td class="avalynx-table-center">
+				<button type="button" class="btn btn-sm btn-primary">Edit</button>
+				<button type="button" class="btn btn-sm btn-danger">Delete</button>
+				<button type="button" class="btn btn-sm btn-secondary">PDF</button>
+			</td>
+		</tr>
+		<tr>
+			<td>1002</td>
+			<td>Erika Musterfrau</td>
+			<td>Finance</td>
+			<td>erika.musterfrau@example.com</td>
+			<td class="avalynx-table-center">
+				<button type="button" class="btn btn-sm btn-primary">Edit</button>
+				<button type="button" class="btn btn-sm btn-danger">Delete</button>
+				<button type="button" class="btn btn-sm btn-secondary">PDF</button>
+			</td>
+		</tr>
+		<tr>
+			<td>1003</td>
+			<td>John Doe</td>
+			<td>Support</td>
+			<td>john.doe@example.com</td>
+			<td class="avalynx-table-center">
+				<button type="button" class="btn btn-sm btn-primary">Edit</button>
+				<button type="button" class="btn btn-sm btn-danger">Delete</button>
+				<button type="button" class="btn btn-sm btn-secondary">PDF</button>
+			</td>
+		</tr>
+		</tbody>
+	</table>
+
+	<script>
+		document.addEventListener('DOMContentLoaded', () => {
+			new AvalynxTable('.avalynx-table');
+
+			const copyButtonTable = document.getElementById('copyButtonTable');
+			if (copyButtonTable !== null) {
+				copyButtonTable.addEventListener('click', () => {
+					const code = document.getElementById('tableBlock').innerText;
+					navigator.clipboard.writeText(code).then(() => {
+						copyButtonTable.textContent = 'Copied!';
+					}).catch(err => {
+						console.error('Error copying text: ', err);
+					});
+				});
+			}
+		});
+	</script>
+
+	<h3>Table HTML<a class="p-1 float-end btn btn-secondary btn-small" id="copyButtonTable">Copy to clipboard</a></h3>
+	<pre><code class="language-xml" id="tableBlock">
+&lt;table class=&quot;avalynx-table avalynx-table-lg table table-bordered table-striped align-middle&quot;&gt;
+	&lt;thead&gt;
+	&lt;tr&gt;
+		&lt;th&gt;ID&lt;/th&gt;
+		&lt;th&gt;Name&lt;/th&gt;
+		&lt;th&gt;Department&lt;/th&gt;
+		&lt;th&gt;Email&lt;/th&gt;
+		&lt;th class=&quot;avalynx-table-center&quot;&gt;Options&lt;/th&gt;
+	&lt;/tr&gt;
+	&lt;/thead&gt;
+	&lt;tbody&gt;
+	&lt;tr&gt;
+		&lt;td&gt;1001&lt;/td&gt;
+		&lt;td&gt;Max Mustermann&lt;/td&gt;
+		&lt;td&gt;Sales&lt;/td&gt;
+		&lt;td&gt;max.mustermann@example.com&lt;/td&gt;
+		&lt;td class=&quot;avalynx-table-center&quot;&gt;
+			&lt;button type=&quot;button&quot; class=&quot;btn btn-sm btn-primary&quot;&gt;Edit&lt;/button&gt;
+			&lt;button type=&quot;button&quot; class=&quot;btn btn-sm btn-danger&quot;&gt;Delete&lt;/button&gt;
+			&lt;button type=&quot;button&quot; class=&quot;btn btn-sm btn-secondary&quot;&gt;PDF&lt;/button&gt;
+		&lt;/td&gt;
+	&lt;/tr&gt;
+	&lt;/tbody&gt;
+&lt;/table&gt;
+	</code></pre>
+
+	<h3>JavaScript Source<a class="p-1 float-end btn btn-secondary btn-small" id="copyButton">Copy to clipboard</a></h3>
+	<pre><code class="language-javascript" id="codeBlock">
+document.addEventListener('DOMContentLoaded', () => {
+	new AvalynxTable('.avalynx-table');
+});
+	</code></pre>
+
+	<a href="https://github.com/avalynx/avalynx-table" target="_blank" class="btn btn-primary">AvalynxTable on GitHub</a>
+	<a href="https://github.com/avalynx/" target="_blank" class="btn btn-primary">Avalynx on GitHub</a>
+
+</div>
+</body>
+</html>
