@@ -42,7 +42,7 @@
 	<h1>Table with 5 columns</h1>
 	<div class="row">
 		<div class="col-12">
-			<table class="avalynx-table avalynx-table-lg table table-bordered table-striped align-middle">
+			<table id="table-options-primary" class="avalynx-table avalynx-table-lg table table-bordered table-striped align-middle">
 				<thead>
 				<tr>
 					<th>ID</th>
@@ -96,7 +96,7 @@
 	<h1 class="avalynx-table-center">Table with 8 columns</h1>
 	<div class="row">
 		<div class="col-12">
-			<table class="avalynx-table avalynx-table-lg table table-bordered table-striped align-middle">
+			<table id="table-options-secondary" class="avalynx-table avalynx-table-lg table table-bordered table-striped align-middle">
 				<thead>
 				<tr>
 					<th>ID</th>
@@ -153,9 +153,61 @@
 
 	<hr class="my-5">
 
-	<h3>Table HTML<a class="p-1 float-end btn btn-secondary btn-small" data-copy-target="tableBlock">Copy to clipboard</a></h3>
-	<pre><code class="language-xml" id="tableBlock">
-&lt;!-- 8 columns example --&gt;
+	<h2 class="mt-4">Source Code - Table with 5 columns</h2>
+	<div class="row mt-3">
+		<div class="col-12">
+			<h4>HTML Source
+				<button class="p-1 float-end btn btn-secondary btn-small" data-copy-target="tableBlock1">Copy to clipboard</button>
+			</h4>
+			<pre><code class="language-xml" id="tableBlock1">
+&lt;table class=&quot;avalynx-table avalynx-table-lg table table-bordered table-striped align-middle&quot;&gt;
+	&lt;thead&gt;
+	&lt;tr&gt;
+		&lt;th&gt;ID&lt;/th&gt;
+		&lt;th&gt;Name&lt;/th&gt;
+		&lt;th&gt;Department&lt;/th&gt;
+		&lt;th&gt;Email&lt;/th&gt;
+		&lt;th class=&quot;avalynx-table-center&quot;&gt;Options&lt;/th&gt;
+	&lt;/tr&gt;
+	&lt;/thead&gt;
+	&lt;tbody&gt;
+	&lt;tr&gt;
+		&lt;td&gt;1001&lt;/td&gt;
+		&lt;td&gt;Max Mustermann&lt;/td&gt;
+		&lt;td&gt;Sales&lt;/td&gt;
+		&lt;td&gt;max.mustermann@example.com&lt;/td&gt;
+		&lt;td class=&quot;avalynx-table-center&quot;&gt;
+			&lt;button type=&quot;button&quot; class=&quot;btn btn-sm btn-primary&quot;&gt;Edit&lt;/button&gt;
+			&lt;button type=&quot;button&quot; class=&quot;btn btn-sm btn-danger&quot;&gt;Delete&lt;/button&gt;
+			&lt;button type=&quot;button&quot; class=&quot;btn btn-sm btn-secondary&quot;&gt;PDF&lt;/button&gt;
+		&lt;/td&gt;
+	&lt;/tr&gt;
+	&lt;/tbody&gt;
+&lt;/table&gt;
+			</code></pre>
+		</div>
+	</div>
+
+	<div class="row mt-3">
+		<div class="col-12">
+			<h3>JavaScript Source<a class="p-1 float-end btn btn-secondary btn-small" data-copy-target="codeBlock1">Copy to clipboard</a></h3>
+			<pre><code class="language-javascript" id="codeBlock1">
+document.addEventListener('DOMContentLoaded', () => {
+	new AvalynxTable('#table-options-primary');
+});
+			</code></pre>
+		</div>
+	</div>
+
+	<hr class="my-5">
+
+	<h2 class="mt-4">Source Code - Table with 8 columns</h2>
+	<div class="row mt-3">
+		<div class="col-12">
+			<h4>HTML Source
+				<button class="p-1 float-end btn btn-secondary btn-small" data-copy-target="tableBlock2">Copy to clipboard</button>
+			</h4>
+			<pre><code class="language-xml" id="tableBlock2">
 &lt;table class=&quot;avalynx-table avalynx-table-lg table table-bordered table-striped align-middle&quot;&gt;
 	&lt;thead&gt;
 	&lt;tr&gt;
@@ -184,14 +236,20 @@
 	&lt;/tr&gt;
 	&lt;/tbody&gt;
 &lt;/table&gt;
-	</code></pre>
+			</code></pre>
+		</div>
+	</div>
 
-	<h3>JavaScript Source<a class="p-1 float-end btn btn-secondary btn-small" data-copy-target="codeBlock">Copy to clipboard</a></h3>
-	<pre><code class="language-javascript" id="codeBlock">
+	<div class="row mt-3">
+		<div class="col-12">
+			<h3>JavaScript Source<a class="p-1 float-end btn btn-secondary btn-small" data-copy-target="codeBlock2">Copy to clipboard</a></h3>
+			<pre><code class="language-javascript" id="codeBlock2">
 document.addEventListener('DOMContentLoaded', () => {
-	new AvalynxTable('.avalynx-table');
+	new AvalynxTable('#table-options-secondary');
 });
-	</code></pre>
+			</code></pre>
+		</div>
+	</div>
 
 	<footer class="mt-5 pt-4 border-top">
 		<a href="https://github.com/avalynx/avalynx-table" target="_blank" class="btn btn-primary">AvalynxTable on GitHub</a>

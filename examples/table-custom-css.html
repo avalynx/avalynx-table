@@ -56,7 +56,7 @@
 
 	<div class="row">
 		<div class="col-12">
-			<table class="avalynx-table avalynx-table-md table table-bordered table-striped">
+			<table id="table-custom-primary" class="avalynx-table avalynx-table-md table table-bordered table-striped">
 				<thead>
 				<tr>
 					<th>Product</th>
@@ -100,7 +100,7 @@
 	<h1>Another Table with Custom Styling</h1>
 	<div class="row">
 		<div class="col-12">
-			<table class="avalynx-table avalynx-table-lg table table-bordered table-striped">
+			<table id="table-custom-secondary" class="avalynx-table avalynx-table-lg table table-bordered table-striped">
 				<thead>
 				<tr>
 					<th>Employee</th>
@@ -135,8 +135,11 @@
 
 	<hr class="my-5">
 
-	<h3>CSS Variables Override<a class="p-1 float-end btn btn-secondary btn-small" data-copy-target="cssBlock">Copy to clipboard</a></h3>
-	<pre><code class="language-css" id="cssBlock">
+	<h2 class="mt-4">Source Code - CSS Variables Override</h2>
+	<div class="row mt-3">
+		<div class="col-12">
+			<h3>CSS Variables Override<a class="p-1 float-end btn btn-secondary btn-small" data-copy-target="cssBlock">Copy to clipboard</a></h3>
+			<pre><code class="language-css" id="cssBlock">
 :root {
     --avalynx-table-border-color: var(--bs-primary);
     --avalynx-table-cell-border-color: var(--bs-danger);
@@ -147,14 +150,37 @@
     --avalynx-table-before-style: italic;
     --avalynx-table-before-decoration: underline;
 }
-	</code></pre>
+			</code></pre>
+		</div>
+	</div>
 
-	<h3>JavaScript Source<a class="p-1 float-end btn btn-secondary btn-small" data-copy-target="codeBlock">Copy to clipboard</a></h3>
-	<pre><code class="language-javascript" id="codeBlock">
+	<hr class="my-5">
+
+	<h2 class="mt-4">Source Code - JavaScript Example 1</h2>
+	<div class="row mt-3">
+		<div class="col-12">
+			<h3>JavaScript Source<a class="p-1 float-end btn btn-secondary btn-small" data-copy-target="codeBlock1">Copy to clipboard</a></h3>
+			<pre><code class="language-javascript" id="codeBlock1">
 document.addEventListener('DOMContentLoaded', () => {
-	new AvalynxTable('.avalynx-table');
+	new AvalynxTable('#table-custom-primary');
 });
-	</code></pre>
+			</code></pre>
+		</div>
+	</div>
+
+	<hr class="my-5">
+
+	<h2 class="mt-4">Source Code - JavaScript Example 2</h2>
+	<div class="row mt-3">
+		<div class="col-12">
+			<h3>JavaScript Source<a class="p-1 float-end btn btn-secondary btn-small" data-copy-target="codeBlock2">Copy to clipboard</a></h3>
+			<pre><code class="language-javascript" id="codeBlock2">
+document.addEventListener('DOMContentLoaded', () => {
+	new AvalynxTable('#table-custom-secondary');
+});
+			</code></pre>
+		</div>
+	</div>
 
 	<footer class="mt-5 pt-4 border-top">
 		<a href="https://github.com/avalynx/avalynx-table" target="_blank" class="btn btn-primary">AvalynxTable on GitHub</a>
