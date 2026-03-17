@@ -15,6 +15,12 @@ AvalynxTable ist ein leichtgewichtiges, abhängigkeitsfreies Tabellensystem, das
 - **Automatische Tabellenerweiterung**: Erweitert Tabellen durch Hinzufügen von Datenattributen zu Tabellenzellen basierend auf der entsprechenden Kopfzeile. Dies ist besonders nützlich für responsive Designs, bei denen Tabellenzellen ihre Header auf kleineren Bildschirmen inline anzeigen müssen.
 - **Flexible Selector-Unterstützung**: Unterstützt benutzerdefinierte Selektoren für das Ansprechen von Tabellen innerhalb des DOM. Dies ermöglicht eine feingranulare Kontrolle darüber, welche Tabellen erweitert werden.
 - **Benutzerdefinierte Breakpoints**: Ermöglicht die Angabe benutzerdefinierter Breakpoints für den Zeitpunkt, an dem Tabellen übereinander gestapelt werden sollen. Dies ist nützlich, um eine konsistente Benutzererfahrung über verschiedene Bildschirmgrößen hinweg zu schaffen.
+- **Optionale Sortierung**: Sortieren per Klick auf Spaltenüberschriften (aufsteigend/absteigend), sobald `options.sorting` konfiguriert ist.
+- **Multi-Sort-Unterstützung**: Auf Desktop mit `Ctrl` oder `Shift` mehrere Spalten sortieren. Im Stacked-Modus wird ein eigener Multi-Sort-Schalter angezeigt.
+- **Konfigurierbare Sortierspalten und Defaults**: Definieren Sie sortierbare Spalten und initiale Sortierungen per Index, Spaltenname oder `data-avalynx-table-sort-id`.
+- **Benutzerdefinierte Sortierwerte**: Mit `data-avalynx-table-sort-value` lassen sich formatierte Werte wie Währungen sauber sortieren.
+- **Stacked-Sortiersteuerung**: In der gestapelten Ansicht werden automatisch mobile Sortierbuttons eingeblendet.
+- **Anpassbare Sprache und Button-Klassen**: Beschriftungen und CSS-Klassen für Sortierbuttons sind konfigurierbar.
 
 ## Beispiel
 
@@ -22,6 +28,8 @@ Hier ist ein einfaches Beispiel für die Verwendung von AvalynxTable in Ihrem Pr
 
 * [Übersicht](https://avalynx-table.jbs-newmedia.de/examples/index.html)
 * [Tabelle](https://avalynx-table.jbs-newmedia.de/examples/table.html)
+* [Tabelle mit Options-Buttons](https://avalynx-table.jbs-newmedia.de/examples/table-options.html)
+* [Tabelle mit Sortierung](https://avalynx-table.jbs-newmedia.de/examples/table-sorting.html)
 * [Tabelle mit benutzerdefinierten CSS-Variablen](https://avalynx-table.jbs-newmedia.de/examples/table-custom-css.html)
 
 ## Installation
@@ -50,8 +58,8 @@ Ersetzen Sie `path/to/avalynx-table.js` und `path/to/avalynx-table.css` durch de
 AvalynxTable ist auch über [jsDelivr](https://www.jsdelivr.com/) verfügbar. Sie können es wie folgt in Ihr Projekt einbinden:
 
 ```html
-<link href="https://cdn.jsdelivr.net/npm/avalynx-table@1.0.2/dist/css/avalynx-table.min.css" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/avalynx-table@1.0.2/dist/js/avalynx-table.min.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/avalynx-table@1.0.3/dist/css/avalynx-table.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/avalynx-table@1.0.3/dist/js/avalynx-table.min.js"></script>
 ```
 
 Stellen Sie sicher, dass Sie auch das JS/CSS von Bootstrap in Ihr Projekt einbinden, um eine korrekte Anzeige von AvalynxTable zu gewährleisten.
@@ -142,12 +150,124 @@ Um AvalynxTable in Ihrem Projekt zu verwenden, stellen Sie zunächst sicher, das
 new AvalynxTable('.avalynx-table');
 ```
 
+### Verwendung mit Sortieroptionen
+
+```html
+<table id="table-sorting" class="avalynx-table avalynx-table-md table table-bordered table-striped">
+  <thead>
+  <tr>
+    <th data-avalynx-table-sort-id="id">ID</th>
+    <th data-avalynx-table-sort-id="name">Name</th>
+    <th data-avalynx-table-sort-id="department">Abteilung</th>
+    <th data-avalynx-table-sort-id="salary">Gehalt</th>
+    <th data-avalynx-sortable="false">Status</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr>
+    <td data-avalynx-table-sort-value="1002">1002</td>
+    <td>Max Mustermann</td>
+    <td>Vertrieb</td>
+    <td data-avalynx-table-sort-value="62000">62.000 €</td>
+    <td>Aktiv</td>
+  </tr>
+  </tbody>
+</table>
+```
+
+```javascript
+new AvalynxTable('#table-sorting', {
+  sortableColumns: ['department', 'name', 'salary'],
+  sorting: [
+    { column: 'department', dir: 'asc' },
+    { column: 'name', dir: 'asc' }
+  ],
+  stackedSorter: true,
+  stackedMultiSortToggle: true
+});
+```
+
+### Verwendung mit Sprache und Button-Class-Strings
+
+```javascript
+new AvalynxTable('.avalynx-table', {
+  buttonClasses: {
+    multiSortInactive: 'btn-primary btn-custom-2',
+    multiSortActive: 'btn-primary btn-custom-3',
+    sortButtonInactive: 'btn-outline-primary btn-custom-2',
+    sortButtonActive: 'btn-primary btn-custom-3'
+  }
+}, {
+  sortByLabel: 'Sortiere nach',
+  multiSortLabel: 'Mehrfachsuche',
+  multiSortOnLabel: 'an',
+  multiSortOffLabel: 'aus',
+  columnLabel: 'Spalte'
+});
+```
+
 ## Optionen
 
 AvalynxTable ermöglicht die folgenden Optionen zur Anpassung:
 
 - `selector`: (string) Der Selektor, der für das Ansprechen von Tabellen innerhalb des DOM verwendet werden soll (Standard: `'.avalynx-table'`).
-- `options`: Ein Objekt, das die folgenden Schlüssel enthält: (**demnächst**)
+- `options.sortableColumns`: (`Array<number|string>`) Sortierbare Spalten per Index, Spaltentext oder `data-avalynx-table-sort-id`.
+- `options.sorting`: (`Array<{column:number|string,dir:string}>`) Initiale Sortierung, z.B. `[{ column: 'name', dir: 'asc' }]`.
+  Die Sortierung ist nur aktiv, wenn dieses Array mindestens eine Regel enthält.
+- `options.stackedSorter`: (`boolean`) Gestapelte Sortiersteuerung anzeigen (Standard: `true`).
+- `options.stackedMultiSortToggle`: (`boolean`) Multi-Sort-Umschalter im Stacked-Modus anzeigen (Standard: `true`).
+- `options.buttonClasses`: (`object`) Class-Strings für gestapelte Buttons:
+  - `multiSortInactive`
+  - `multiSortActive`
+  - `sortButtonInactive`
+  - `sortButtonActive`
+  - Aliase: `multiSearchInactive`, `multiSearchActive`
+
+### Sortierbezogene Datenattribute
+
+- `data-avalynx-table-sort-id`: Stabile ID für Header, die in `sortableColumns` und `sorting` referenziert werden kann.
+- `data-avalynx-sortable="false"`: Schließt eine Spalte explizit von der Sortierung aus.
+- `data-avalynx-table-sort-value`: Optionaler normalisierter Wert für die Sortierung von Zellinhalten.
+
+### Responsive-Klassen
+
+Nutzen Sie eine der integrierten Tabellenklassen, um den Stacking-Breakpoint festzulegen:
+
+- `.avalynx-table` (sm)
+- `.avalynx-table-md`
+- `.avalynx-table-lg`
+- `.avalynx-table-xl`
+- `.avalynx-table-xxl`
+
+### CSS-Variablen
+
+Das Verhalten im Stacked-Modus kann über CSS-Variablen angepasst werden, z.B.:
+
+- `--avalynx-table-cell-padding-left`
+- `--avalynx-table-cell-before-width`
+- `--avalynx-table-before-content`
+- `--avalynx-table-before-weight`
+
+### Sprache
+
+Texte werden über den dritten Constructor-Parameter `language` konfiguriert:
+
+- `sortByLabel`
+- `multiSortLabel`
+- `multiSortOnLabel`
+- `multiSortOffLabel`
+- `columnLabel`
+- Aliase: `multiSearchLabel`, `multiSearchOnLabel`, `multiSearchOffLabel`
+
+```javascript
+new AvalynxTable('.avalynx-table', {}, {
+  sortByLabel: 'Sortiere nach',
+  multiSortLabel: 'Mehrfachsuche',
+  multiSortOnLabel: 'an',
+  multiSortOffLabel: 'aus',
+  columnLabel: 'Spalte'
+});
+```
 
 ## Mitwirken
 

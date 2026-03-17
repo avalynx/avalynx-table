@@ -741,13 +741,11 @@ describe('AvalynxTable', () => {
                 </table>
             `;
 
-            new AvalynxTable('.avalynx-table', {
-                language: {
-                    sortByLabel: 'Sortiere nach',
-                    multiSortLabel: 'Mehrfachsortierung',
-                    multiSortOnLabel: 'an',
-                    multiSortOffLabel: 'aus'
-                }
+            new AvalynxTable('.avalynx-table', {}, {
+                sortByLabel: 'Sortiere nach',
+                multiSortLabel: 'Mehrfachsortierung',
+                multiSortOnLabel: 'an',
+                multiSortOffLabel: 'aus'
             });
 
             const header = container.querySelector('th');
@@ -1025,6 +1023,458 @@ describe('AvalynxTable', () => {
             const amountButton = container.querySelector('[data-avalynx-sort-button="1"]');
             amountButton.click();
             expect(getAmounts()).toEqual(['2 €', '10 €']);
+        });
+    });
+
+    describe('Coverage branches and edge behaviors', () => {
+        test('should return early in setupSorting when headers or sortable columns are missing', () => {
+            container.innerHTML = `
+                <table id="t1"><thead></thead><tbody><tr><td>A</td></tr></tbody></table>
+                <table id="t2">
+                    <thead><tr><th data-avalynx-sortable="false">Only</th></tr></thead>
+                    <tbody><tr><td>A</td></tr></tbody>
+                </table>
+            `;
+
+            const instance = new AvalynxTable('#t1');
+            expect(() => instance.setupSorting(container.querySelector('#t1'))).not.toThrow();
+
+            instance.options.sortableColumns = [];
+            expect(() => instance.setupSorting(container.querySelector('#t2'))).not.toThrow();
+        });
+
+        test('should cover resolveColumnIndex and normalizeDefaultSorting fallback branches', () => {
+            container.innerHTML = `
+                <table class="avalynx-table">
+                    <thead><tr><th data-avalynx-table-sort-id="name">Name</th></tr></thead>
+                    <tbody><tr><td>A</td></tr></tbody>
+                </table>
+            `;
+
+            const instance = new AvalynxTable('.avalynx-table');
+            const headers = Array.from(container.querySelectorAll('th'));
+            const byId = new Map([['name', 0]]);
+            const byName = new Map([['name', 0]]);
+
+            expect(instance.resolveColumnIndex('', headers, byId, byName)).toBe(-1);
+            expect(instance.resolveColumnIndex('unknown', headers, byId, byName)).toBe(-1);
+
+            instance.options.sorting = 'invalid';
+            expect(instance.normalizeDefaultSorting(headers, [0])).toEqual([]);
+
+            instance.options.sorting = [null, { column: 'unknown', dir: 'asc' }, { column: 'name', dir: 'asc' }];
+            expect(instance.normalizeDefaultSorting(headers, [0])).toEqual([{ column: 0, dir: 'asc' }]);
+        });
+
+        test('should cover applySorting/getCellSortValue and stacked control guard branches', () => {
+            container.innerHTML = `
+                <table class="avalynx-table">
+                    <thead><tr><th>Name</th></tr></thead>
+                    <tbody><tr><td>A</td></tr></tbody>
+                </table>
+            `;
+
+            const instance = new AvalynxTable('.avalynx-table');
+            const table = container.querySelector('table');
+
+            expect(instance.getCellSortValue(null)).toEqual({ text: '', numeric: false, number: 0 });
+
+            const state = instance.tableStates.get(table);
+            state.stackedControls = null;
+            expect(() => instance.updateStackedSortControls(table, state)).not.toThrow();
+
+            state.stackedControls = document.createElement('div');
+            expect(() => instance.updateStackedSortControls(table, state)).not.toThrow();
+
+            const tableWithoutBody = document.createElement('table');
+            expect(() => instance.applySorting(tableWithoutBody, state)).not.toThrow();
+        });
+
+        test('should cover visibility and resize guard branches', () => {
+            container.innerHTML = `
+                <table class="avalynx-table"><thead><tr><th>Name</th></tr></thead><tbody><tr><td>A</td></tr></tbody></table>
+            `;
+            const instance = new AvalynxTable('.avalynx-table');
+            const table = container.querySelector('table');
+            const state = instance.tableStates.get(table);
+
+            const originalGetComputedStyle = window.getComputedStyle;
+            window.getComputedStyle = undefined;
+            expect(instance.isStacked(table)).toBe(false);
+            window.getComputedStyle = originalGetComputedStyle;
+
+            const plainTable = document.createElement('table');
+            expect(instance.isStacked(plainTable)).toBe(false);
+
+            state.stackedControls = null;
+            expect(() => instance.updateStackedSortControlsVisibility(table, state)).not.toThrow();
+
+            instance.tables = [document.createElement('table')];
+            expect(() => instance.handleWindowResize()).not.toThrow();
+        });
+
+        test('should cover header click and keydown sort handlers', () => {
+            container.innerHTML = `
+                <table class="avalynx-table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th data-avalynx-sortable="false">NoSort</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>B</td><td>X</td></tr>
+                        <tr><td>A</td><td>Y</td></tr>
+                    </tbody>
+                </table>
+            `;
+
+            new AvalynxTable('.avalynx-table');
+            const sortableHeader = container.querySelector('th.avalynx-table-sorting');
+            expect(sortableHeader).not.toBeNull();
+
+            sortableHeader.click();
+
+            const enterEvent = new KeyboardEvent('keydown', { key: 'Enter', bubbles: true });
+            sortableHeader.dispatchEvent(enterEvent);
+        });
+
+        test('should cover sortableColumns custom resolution branches', () => {
+            container.innerHTML = `
+                <table class="avalynx-table">
+                    <thead>
+                        <tr>
+                            <th data-avalynx-table-sort-id="id">ID</th>
+                            <th>Name</th>
+                        </tr>
+                    </thead>
+                    <tbody><tr><td>1</td><td>A</td></tr></tbody>
+                </table>
+            `;
+
+            const instance = new AvalynxTable('.avalynx-table', {
+                sortableColumns: ['id', '1', 'name', 0, 'unknown']
+            });
+
+            const table = container.querySelector('table');
+            const state = instance.tableStates.get(table);
+            expect(state.sortableIndices).toEqual([0, 1]);
+
+            const headers = Array.from(container.querySelectorAll('th'));
+            const byId = new Map([['id', 0]]);
+            const byName = new Map([['id', 0], ['name', 1]]);
+
+            expect(instance.resolveColumnIndex(0, headers, byId, byName)).toBe(0);
+            expect(instance.resolveColumnIndex('1', headers, byId, byName)).toBe(1);
+            expect(instance.resolveColumnIndex('name', headers, byId, byName)).toBe(1);
+        });
+
+        test('should cover multi-sort remove branch and stable fallback compare branch', () => {
+            container.innerHTML = `
+                <table class="avalynx-table">
+                    <thead><tr><th>Name</th></tr></thead>
+                    <tbody>
+                        <tr><td>Same</td></tr>
+                        <tr><td>Same</td></tr>
+                    </tbody>
+                </table>
+            `;
+
+            const instance = new AvalynxTable('.avalynx-table', {
+                sorting: [{ column: 0, dir: 'desc' }]
+            });
+
+            const table = container.querySelector('table');
+            const state = instance.tableStates.get(table);
+
+            state.initialSorting = [];
+            state.sorting = [{ column: 0, dir: 'desc' }];
+            instance.toggleSorting(table, state, 0, true);
+            expect(state.sorting).toEqual([]);
+
+            state.sorting = [{ column: 0, dir: 'asc' }];
+            expect(() => instance.applySorting(table, state)).not.toThrow();
+        });
+
+        test('should cover invalid sort button dataset and no-thead stacked branch', () => {
+            container.innerHTML = `
+                <table class="avalynx-table">
+                    <thead><tr><th>Name</th></tr></thead>
+                    <tbody><tr><td>A</td></tr></tbody>
+                </table>
+            `;
+
+            const instance = new AvalynxTable('.avalynx-table');
+            const table = container.querySelector('table');
+            const state = instance.tableStates.get(table);
+
+            const controls = document.createElement('div');
+            controls.innerHTML = `
+                <div class="avalynx-table-sort-buttons">
+                    <button data-avalynx-sort-button="x"></button>
+                </div>
+            `;
+            state.stackedControls = controls;
+            expect(() => instance.updateStackedSortControls(table, state)).not.toThrow();
+
+            const noTheadTable = document.createElement('table');
+            noTheadTable.className = 'avalynx-table';
+            expect(instance.isStacked(noTheadTable)).toBe(false);
+        });
+
+        test('should cover resize path where updateStackedSortControlsVisibility is invoked', () => {
+            container.innerHTML = `
+                <table class="avalynx-table">
+                    <thead><tr><th>Name</th></tr></thead>
+                    <tbody><tr><td>A</td></tr></tbody>
+                </table>
+            `;
+
+            const instance = new AvalynxTable('.avalynx-table');
+            const spy = jest.spyOn(instance, 'updateStackedSortControlsVisibility');
+            instance.handleWindowResize();
+            expect(spy).toHaveBeenCalled();
+            spy.mockRestore();
+        });
+
+        test('should cover click handler guard branches for missing header and invalid sort index', () => {
+            container.innerHTML = `
+                <table class="avalynx-table">
+                    <thead><tr><th>Name</th></tr></thead>
+                    <tbody><tr><td>A</td></tr></tbody>
+                </table>
+            `;
+
+            new AvalynxTable('.avalynx-table');
+            const thead = container.querySelector('thead');
+            const header = container.querySelector('th.avalynx-table-sorting');
+
+            thead.dispatchEvent(new MouseEvent('click', { bubbles: true }));
+
+            header.dataset.avalynxSortIndex = 'x';
+            header.dispatchEvent(new MouseEvent('click', { bubbles: true }));
+
+            header.dataset.avalynxSortIndex = '0';
+        });
+
+        test('should cover keydown handler guard branches for key, missing header and invalid sort index', () => {
+            container.innerHTML = `
+                <table class="avalynx-table">
+                    <thead><tr><th>Name</th></tr></thead>
+                    <tbody><tr><td>A</td></tr></tbody>
+                </table>
+            `;
+
+            new AvalynxTable('.avalynx-table');
+            const thead = container.querySelector('thead');
+            const header = container.querySelector('th.avalynx-table-sorting');
+
+            thead.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', bubbles: true }));
+            thead.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter', bubbles: true }));
+
+            header.dataset.avalynxSortIndex = 'x';
+            header.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter', bubbles: true }));
+
+            header.dataset.avalynxSortIndex = '0';
+        });
+
+        test('should cover multi-sort branches for adding and updating entries', () => {
+            container.innerHTML = `
+                <table class="avalynx-table">
+                    <thead><tr><th>Name</th></tr></thead>
+                    <tbody>
+                        <tr><td>B</td></tr>
+                        <tr><td>A</td></tr>
+                    </tbody>
+                </table>
+            `;
+
+            const instance = new AvalynxTable('.avalynx-table');
+            const table = container.querySelector('table');
+            const state = instance.tableStates.get(table);
+
+            state.sorting = [];
+            instance.toggleSorting(table, state, 0, true);
+            expect(state.sorting).toEqual([{ column: 0, dir: 'asc' }]);
+
+            instance.toggleSorting(table, state, 0, true);
+            expect(state.sorting).toEqual([{ column: 0, dir: 'desc' }]);
+        });
+
+        test('should cover constructor fallback branches for language, buttonClasses and stacked flags', () => {
+            container.innerHTML = `
+                <table class="avalynx-table">
+                    <thead><tr><th>Name</th></tr></thead>
+                    <tbody><tr><td>A</td></tr></tbody>
+                </table>
+            `;
+
+            const instance = new AvalynxTable('.avalynx-table', {
+                stackedSorter: false,
+                buttonClasses: 'invalid'
+            }, 'invalid');
+
+            expect(instance.options.stackedSorter).toBe(false);
+            expect(typeof instance.options.buttonClasses).toBe('object');
+            expect(instance.language.sortByLabel).toBe('Sort by');
+        });
+
+        test('should cover legacy sort id path and empty id branch with custom sortableColumns', () => {
+            container.innerHTML = `
+                <table class="avalynx-table">
+                    <thead>
+                        <tr>
+                            <th data-avalynx-sort-id="legacy">Legacy</th>
+                            <th>Name</th>
+                        </tr>
+                    </thead>
+                    <tbody><tr><td>1</td><td>A</td></tr></tbody>
+                </table>
+            `;
+
+            const instance = new AvalynxTable('.avalynx-table', {
+                sortableColumns: ['legacy', 'name']
+            });
+
+            const table = container.querySelector('table');
+            const state = instance.tableStates.get(table);
+            expect(state.sortableIndices).toEqual([0, 1]);
+        });
+
+        test('should cover default isMultiSort argument and multi-sort key combinations', () => {
+            container.innerHTML = `
+                <table class="avalynx-table">
+                    <thead><tr><th>Name</th></tr></thead>
+                    <tbody>
+                        <tr><td>B</td></tr>
+                        <tr><td>A</td></tr>
+                    </tbody>
+                </table>
+            `;
+
+            const instance = new AvalynxTable('.avalynx-table');
+            const table = container.querySelector('table');
+            const state = instance.tableStates.get(table);
+            const thead = table.querySelector('thead');
+            const header = table.querySelector('th.avalynx-table-sorting');
+
+            instance.toggleSorting(table, state, 0);
+            expect(state.sorting.length).toBeGreaterThan(0);
+
+            header.dispatchEvent(new MouseEvent('click', { bubbles: true, shiftKey: true }));
+            header.dispatchEvent(new KeyboardEvent('keydown', {
+                key: 'Enter',
+                bubbles: true,
+                shiftKey: true
+            }));
+
+            thead.dispatchEvent(new MouseEvent('click', { bubbles: true, ctrlKey: true }));
+        });
+
+        test('should cover getCellSortValue final fallback and updateStackedSortControls empty dataset fallback', () => {
+            container.innerHTML = `
+                <table class="avalynx-table">
+                    <thead><tr><th>Name</th></tr></thead>
+                    <tbody><tr><td></td></tr></tbody>
+                </table>
+            `;
+
+            const instance = new AvalynxTable('.avalynx-table');
+            const table = container.querySelector('table');
+            const state = instance.tableStates.get(table);
+            const emptyCell = table.querySelector('td');
+
+            const value = instance.getCellSortValue(emptyCell);
+            expect(value).toEqual({ text: '', numeric: false, number: 0 });
+
+            const controls = document.createElement('div');
+            controls.innerHTML = `
+                <div class="avalynx-table-sort-buttons">
+                    <button></button>
+                </div>
+            `;
+            state.stackedControls = controls;
+            expect(() => instance.updateStackedSortControls(table, state)).not.toThrow();
+        });
+
+        test('should cover stacked control visibility true branch', () => {
+            container.innerHTML = `
+                <table class="avalynx-table">
+                    <thead><tr><th>Name</th></tr></thead>
+                    <tbody><tr><td>A</td></tr></tbody>
+                </table>
+            `;
+
+            const instance = new AvalynxTable('.avalynx-table', { stackedMultiSortToggle: false });
+            const table = container.querySelector('table');
+            const state = instance.tableStates.get(table);
+
+            const originalIsStacked = instance.isStacked;
+            instance.isStacked = () => true;
+            instance.updateStackedSortControlsVisibility(table, state);
+            expect(state.stackedControls.style.display).toBe('flex');
+            instance.isStacked = originalIsStacked;
+        });
+
+        test('should cover resolveColumnIndex non-string branch and nullish fallback paths for header text', () => {
+            container.innerHTML = `
+                <table class="avalynx-table">
+                    <thead>
+                        <tr>
+                            <th data-avalynx-table-sort-id="">Name</th>
+                            <th>Age</th>
+                        </tr>
+                    </thead>
+                    <tbody><tr><td>A</td><td>1</td></tr></tbody>
+                </table>
+            `;
+
+            const instance = new AvalynxTable('.avalynx-table', {
+                sortableColumns: [0]
+            });
+
+            const headers = Array.from(container.querySelectorAll('th'));
+            Object.defineProperty(headers[0], 'textContent', {
+                configurable: true,
+                get: () => null
+            });
+
+            const byId = new Map();
+            const byName = new Map();
+
+            expect(instance.resolveColumnIndex({}, headers, byId, byName)).toBe(-1);
+            expect(() => instance.getSortableIndices(headers)).not.toThrow();
+            expect(() => instance.normalizeDefaultSorting(headers, [0])).not.toThrow();
+        });
+
+        test('should cover multi-sort toggle active class on initial stacked multi mode', () => {
+            container.innerHTML = `
+                <table class="avalynx-table">
+                    <thead>
+                        <tr>
+                            <th data-avalynx-table-sort-id="name">Name</th>
+                            <th data-avalynx-table-sort-id="age">Age</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>B</td><td>2</td></tr>
+                        <tr><td>A</td><td>1</td></tr>
+                    </tbody>
+                </table>
+            `;
+
+            new AvalynxTable('.avalynx-table', {
+                sorting: [
+                    { column: 'name', dir: 'asc' },
+                    { column: 'age', dir: 'desc' }
+                ]
+            });
+
+            const toggle = container.querySelector('.avalynx-table-sort-multi-toggle');
+            expect(toggle.className).toContain('active');
+
+            toggle.click();
+            expect(toggle.className).not.toContain('active');
         });
     });
 });
