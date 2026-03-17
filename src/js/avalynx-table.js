@@ -12,15 +12,17 @@
  *
  * @param {string} selector - The selector to use for targeting tables within the DOM (default: '.avalynx-table').
  * @param {object} options - An object containing optional keys:
- * @param {array<number|string>} options.sortableColumns - List of sortable columns. Supports index, header label or data-avalynx-sort-id (default: all columns).
+ * @param {array<number|string>} options.sortableColumns - List of sortable columns. Supports index, header label or data-avalynx-table-sort-id (default: all columns).
  * @param {array<{column:number|string,dir:string}>} options.sorting - Initial sorting order, e.g. [{ column: 'name', dir: 'asc' }] (default: []).
  * @param {boolean} options.stackedSorter - Shows sorting controls in stacked mode (default: true).
  * @param {boolean} options.stackedMultiSortToggle - Shows multi-sort toggle in stacked mode (default: true).
+ * @param {object} options.buttonClasses - Class names for stacked control buttons.
+ * @param {object} language - Override labels/texts for stacked controls.
  *
  */
 
 class AvalynxTable {
-    constructor(selector, options = {}) {
+    constructor(selector, options = {}, language = {}) {
         if (!selector) {
             selector = '.avalynx-table';
         }
@@ -40,8 +42,61 @@ class AvalynxTable {
             sorting: [],
             stackedSorter: true,
             stackedMultiSortToggle: true,
+            buttonClasses: {
+                multiSortInactive: 'btn btn-sm btn-outline-secondary avalynx-table-sort-multi-toggle',
+                multiSortActive: 'btn btn-sm btn-secondary avalynx-table-sort-multi-toggle active',
+                sortButtonInactive: 'btn btn-sm btn-outline-primary avalynx-table-sort-button',
+                sortButtonActive: 'btn btn-sm btn-primary avalynx-table-sort-button active'
+            },
             ...(options || {})
         };
+
+        const optionLanguage = (this.options.language && typeof this.options.language === 'object')
+            ? this.options.language
+            : {};
+
+        this.language = {
+            sortByLabel: 'Sort by',
+            multiSortLabel: 'Multi-sort',
+            multiSortOnLabel: 'on',
+            multiSortOffLabel: 'off',
+            multiSearchLabel: null,
+            multiSearchOnLabel: null,
+            multiSearchOffLabel: null,
+            columnLabel: 'Column',
+            ...optionLanguage,
+            ...(language && typeof language === 'object' ? language : {})
+        };
+
+        if (Object.hasOwn(this.language, 'multiSearchLabel') && this.language.multiSearchLabel !== null) {
+            this.language.multiSortLabel = this.language.multiSearchLabel;
+        }
+        if (Object.hasOwn(this.language, 'multiSearchOnLabel') && this.language.multiSearchOnLabel !== null) {
+            this.language.multiSortOnLabel = this.language.multiSearchOnLabel;
+        }
+        if (Object.hasOwn(this.language, 'multiSearchOffLabel') && this.language.multiSearchOffLabel !== null) {
+            this.language.multiSortOffLabel = this.language.multiSearchOffLabel;
+        }
+
+        this.options.buttonClasses = {
+            multiSortInactive: 'btn btn-sm btn-outline-secondary avalynx-table-sort-multi-toggle',
+            multiSortActive: 'btn btn-sm btn-secondary avalynx-table-sort-multi-toggle active',
+            multiSearchInactive: null,
+            multiSearchActive: null,
+            sortButtonInactive: 'btn btn-sm btn-outline-primary avalynx-table-sort-button',
+            sortButtonActive: 'btn btn-sm btn-primary avalynx-table-sort-button active',
+            ...(this.options.buttonClasses && typeof this.options.buttonClasses === 'object'
+                ? this.options.buttonClasses
+                : {})
+        };
+        if (Object.hasOwn(this.options.buttonClasses, 'multiSearchInactive') &&
+            this.options.buttonClasses.multiSearchInactive !== null) {
+            this.options.buttonClasses.multiSortInactive = this.options.buttonClasses.multiSearchInactive;
+        }
+        if (Object.hasOwn(this.options.buttonClasses, 'multiSearchActive') &&
+            this.options.buttonClasses.multiSearchActive !== null) {
+            this.options.buttonClasses.multiSortActive = this.options.buttonClasses.multiSearchActive;
+        }
         this.tableStates = new WeakMap();
 
         this._boundWindowResize = this.handleWindowResize.bind(this);
@@ -94,9 +149,10 @@ class AvalynxTable {
             headers,
             sortableIndices,
             sorting,
+            initialSorting: sorting.map((sort) => ({ ...sort })),
             originalRows: Array.from(tbody.querySelectorAll('tr')),
             stackedControls: null,
-            stackedMultiMode: false,
+            stackedMultiMode: sorting.length > 1,
             sortHandler: null
         };
 
@@ -109,7 +165,7 @@ class AvalynxTable {
             header.dataset.avalynxSortIndex = String(index);
             header.setAttribute('role', 'button');
             header.setAttribute('tabindex', '0');
-            header.setAttribute('aria-label', `Sort by ${header.textContent.trim()}`);
+            header.setAttribute('aria-label', `${this.language.sortByLabel} ${header.textContent.trim()}`);
         });
 
         state.sortHandler = (event) => {
@@ -171,7 +227,7 @@ class AvalynxTable {
         const byName = new Map();
 
         headers.forEach((header, index) => {
-            const id = (header.dataset.avalynxSortId || '').trim();
+            const id = (header.dataset.avalynxTableSortId || header.dataset.avalynxSortId || '').trim();
             const name = (header.textContent || '').trim().toLowerCase();
 
             if (id) {
@@ -228,7 +284,7 @@ class AvalynxTable {
         const byName = new Map();
 
         headers.forEach((header, index) => {
-            const id = (header.dataset.avalynxSortId || '').trim();
+            const id = (header.dataset.avalynxTableSortId || header.dataset.avalynxSortId || '').trim();
             const name = (header.textContent || '').trim().toLowerCase();
 
             if (id) {
@@ -260,15 +316,29 @@ class AvalynxTable {
     toggleSorting(table, state, column, isMultiSort = false) {
         const existingIndex = state.sorting.findIndex(item => item.column === column);
         const existing = existingIndex !== -1 ? state.sorting[existingIndex] : null;
-        const nextDir = existing && existing.dir === 'asc' ? 'desc' : 'asc';
+        let nextDir = null;
+
+        if (!existing) {
+            nextDir = 'asc';
+        } else if (existing.dir === 'asc') {
+            nextDir = 'desc';
+        }
 
         if (!isMultiSort) {
-            state.sorting = [{ column, dir: nextDir }];
+            state.sorting = nextDir ? [{ column, dir: nextDir }] : [];
         } else {
-            if (existingIndex !== -1) {
+            if (!existing) {
+                state.sorting.unshift({ column, dir: 'asc' });
+            } else if (nextDir) {
+                state.sorting[existingIndex] = { column, dir: nextDir };
+            } else {
                 state.sorting.splice(existingIndex, 1);
             }
-            state.sorting.unshift({ column, dir: nextDir });
+        }
+
+        if (state.sorting.length === 0 && state.initialSorting.length > 0) {
+            state.sorting = state.initialSorting.map((sort) => ({ ...sort }));
+            state.stackedMultiMode = state.sorting.length > 1;
         }
 
         this.applySorting(table, state);
@@ -332,7 +402,9 @@ class AvalynxTable {
             };
         }
 
-        const raw = (cell.dataset.avalynxSortValue || cell.textContent || '').trim();
+        const raw = (cell.dataset.avalynxTableSortValue ||
+            cell.dataset.avalynxSortValue ||
+            cell.textContent || '').trim();
         const normalized = raw.replace(/\s+/g, '');
         const numericCandidate = normalized.replace(',', '.');
         const number = Number.parseFloat(numericCandidate);
@@ -370,12 +442,16 @@ class AvalynxTable {
         if (this.options.stackedMultiSortToggle) {
             const toggle = document.createElement('button');
             toggle.type = 'button';
-            toggle.className = 'btn btn-sm btn-outline-secondary avalynx-table-sort-multi-toggle';
-            toggle.textContent = 'Multi-sort: off';
+            toggle.className = state.stackedMultiMode
+                ? this.options.buttonClasses.multiSortActive
+                : this.options.buttonClasses.multiSortInactive;
+            toggle.textContent = this.getMultiSortToggleText(state.stackedMultiMode);
             toggle.addEventListener('click', () => {
                 state.stackedMultiMode = !state.stackedMultiMode;
-                toggle.textContent = `Multi-sort: ${state.stackedMultiMode ? 'on' : 'off'}`;
-                toggle.classList.toggle('active', state.stackedMultiMode);
+                toggle.textContent = this.getMultiSortToggleText(state.stackedMultiMode);
+                toggle.className = state.stackedMultiMode
+                    ? this.options.buttonClasses.multiSortActive
+                    : this.options.buttonClasses.multiSortInactive;
             });
             controls.appendChild(toggle);
         }
@@ -387,9 +463,9 @@ class AvalynxTable {
             const header = state.headers[columnIndex];
             const button = document.createElement('button');
             button.type = 'button';
-            button.className = 'btn btn-sm btn-outline-primary avalynx-table-sort-button';
+            button.className = this.options.buttonClasses.sortButtonInactive;
             button.dataset.avalynxSortButton = String(columnIndex);
-            button.textContent = header.textContent.trim() || `Column ${columnIndex + 1}`;
+            button.textContent = header.textContent.trim() || `${this.language.columnLabel} ${columnIndex + 1}`;
 
             button.addEventListener('click', (event) => {
                 const isMultiSort = event.ctrlKey || event.shiftKey || state.stackedMultiMode;
@@ -403,6 +479,14 @@ class AvalynxTable {
         table.parentNode.insertBefore(controls, table);
 
         return controls;
+    }
+
+    getMultiSortToggleText(isEnabled) {
+        const modeLabel = isEnabled
+            ? this.language.multiSortOnLabel
+            : this.language.multiSortOffLabel;
+
+        return `${this.language.multiSortLabel}: ${modeLabel}`;
     }
 
     updateStackedSortControls(table, state) {
@@ -425,7 +509,8 @@ class AvalynxTable {
 
             buttonByColumn.set(column, button);
 
-            button.classList.remove('active', 'avalynx-table-sorting-asc', 'avalynx-table-sorting-desc');
+            button.className = this.options.buttonClasses.sortButtonInactive;
+            button.classList.remove('avalynx-table-sorting-asc', 'avalynx-table-sorting-desc');
             button.removeAttribute('data-avalynx-sort-order');
 
             const sortIndex = state.sorting.findIndex(item => item.column === column);
@@ -434,7 +519,8 @@ class AvalynxTable {
             }
 
             const dir = state.sorting[sortIndex].dir;
-            button.classList.add('active', dir === 'asc' ? 'avalynx-table-sorting-asc' : 'avalynx-table-sorting-desc');
+            button.className = this.options.buttonClasses.sortButtonActive;
+            button.classList.add(dir === 'asc' ? 'avalynx-table-sorting-asc' : 'avalynx-table-sorting-desc');
             button.dataset.avalynxSortOrder = String(sortIndex + 1);
         });
 
