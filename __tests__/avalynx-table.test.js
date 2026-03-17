@@ -924,7 +924,7 @@ describe('AvalynxTable', () => {
 
             const multiToggle = container.querySelector('.avalynx-table-sort-controls button');
             expect(multiToggle.textContent).toBe(': ');
-            expect(multiToggle.className).toBe('');
+            expect(multiToggle.className).toBe('avalynx-table-sort-multi-toggle');
         });
 
         test('should initialize multi-sort toggle active when default sorting has multiple columns', () => {

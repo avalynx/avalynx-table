@@ -43,10 +43,10 @@ class AvalynxTable {
             stackedSorter: true,
             stackedMultiSortToggle: true,
             buttonClasses: {
-                multiSortInactive: 'btn btn-sm btn-outline-secondary avalynx-table-sort-multi-toggle',
-                multiSortActive: 'btn btn-sm btn-secondary avalynx-table-sort-multi-toggle active',
-                sortButtonInactive: 'btn btn-sm btn-outline-primary avalynx-table-sort-button',
-                sortButtonActive: 'btn btn-sm btn-primary avalynx-table-sort-button active'
+                multiSortInactive: 'btn btn-sm btn-outline-secondary',
+                multiSortActive: 'btn btn-sm btn-secondary',
+                sortButtonInactive: 'btn btn-sm btn-outline-primary',
+                sortButtonActive: 'btn btn-sm btn-primary'
             },
             ...(options || {})
         };
@@ -79,12 +79,12 @@ class AvalynxTable {
         }
 
         this.options.buttonClasses = {
-            multiSortInactive: 'btn btn-sm btn-outline-secondary avalynx-table-sort-multi-toggle',
-            multiSortActive: 'btn btn-sm btn-secondary avalynx-table-sort-multi-toggle active',
+            multiSortInactive: 'btn btn-sm btn-outline-secondary',
+            multiSortActive: 'btn btn-sm btn-secondary',
             multiSearchInactive: null,
             multiSearchActive: null,
-            sortButtonInactive: 'btn btn-sm btn-outline-primary avalynx-table-sort-button',
-            sortButtonActive: 'btn btn-sm btn-primary avalynx-table-sort-button active',
+            sortButtonInactive: 'btn btn-sm btn-outline-primary',
+            sortButtonActive: 'btn btn-sm btn-primary',
             ...(this.options.buttonClasses && typeof this.options.buttonClasses === 'object'
                 ? this.options.buttonClasses
                 : {})
@@ -97,6 +97,23 @@ class AvalynxTable {
             this.options.buttonClasses.multiSearchActive !== null) {
             this.options.buttonClasses.multiSortActive = this.options.buttonClasses.multiSearchActive;
         }
+
+        this.options.buttonClasses.multiSortInactive = this.appendRequiredClasses(
+            this.options.buttonClasses.multiSortInactive,
+            'avalynx-table-sort-multi-toggle'
+        );
+        this.options.buttonClasses.multiSortActive = this.appendRequiredClasses(
+            this.options.buttonClasses.multiSortActive,
+            'avalynx-table-sort-multi-toggle active'
+        );
+        this.options.buttonClasses.sortButtonInactive = this.appendRequiredClasses(
+            this.options.buttonClasses.sortButtonInactive,
+            'avalynx-table-sort-button'
+        );
+        this.options.buttonClasses.sortButtonActive = this.appendRequiredClasses(
+            this.options.buttonClasses.sortButtonActive,
+            'avalynx-table-sort-button active'
+        );
         this.tableStates = new WeakMap();
 
         this._boundWindowResize = this.handleWindowResize.bind(this);
@@ -105,6 +122,11 @@ class AvalynxTable {
         }
 
         this.tables.forEach(table => this.init(table));
+    }
+
+    appendRequiredClasses(value, required) {
+        const allClasses = `${value || ''} ${required}`.trim().split(/\s+/).filter(Boolean);
+        return [...new Set(allClasses)].join(' ');
     }
 
     init(table) {
