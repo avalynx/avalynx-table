@@ -1,12 +1,12 @@
 # AvalynxTable
 
-[![npm version](https://img.shields.io/npm/v/avalynx-table)](https://www.npmjs.com/package/avalynx-table)
-[![npm downloads](https://img.shields.io/npm/dt/avalynx-table)](https://www.npmjs.com/package/avalynx-table)
-[![jsDelivr](https://img.shields.io/jsdelivr/npm/hm/avalynx-table)](https://www.jsdelivr.com/package/npm/avalynx-table)
-[![Lizenz](https://img.shields.io/npm/l/avalynx-table)](LICENSE)
-[![Tests](https://github.com/avalynx/avalynx-table/actions/workflows/tests.yml/badge.svg?branch=main)](https://github.com/avalynx/avalynx-table/actions/workflows/tests.yml)
-[![codecov](https://codecov.io/gh/avalynx/avalynx-table/branch/main/graph/badge.svg)](https://codecov.io/gh/avalynx/avalynx-table)
-[![GitHub stars](https://img.shields.io/github/stars/avalynx/avalynx-table?style=flat&logo=github)](https://github.com/avalynx/avalynx-table)
+[![npm version](https://jbs-newmedia.de/badge/npm/avalynx-table/version.svg)](https://www.npmjs.com/package/avalynx-table)
+[![npm downloads](https://jbs-newmedia.de/badge/npm/avalynx-table/download.svg)](https://www.npmjs.com/package/avalynx-table)
+[![jsDelivr](https://jbs-newmedia.de/badge/jsdelivr/avalynx-table/hits.svg)](https://www.jsdelivr.com/package/npm/avalynx-table)
+[![License](https://jbs-newmedia.de/badge/npm/avalynx-table/license.svg)](LICENSE)
+[![Tests](https://jbs-newmedia.de/badge/github/avalynx/avalynx-table/tests.svg)](https://github.com/avalynx/avalynx-table/actions/workflows/tests.yml)
+[![codecov](https://jbs-newmedia.de/badge/codecov/avalynx/avalynx-table/coverage.svg)](https://codecov.io/gh/avalynx/avalynx-table)
+[![GitHub stars](https://jbs-newmedia.de/badge/github/avalynx/avalynx-table/stars.svg)](https://github.com/avalynx/avalynx-table)
 
 AvalynxTable ist ein leichtgewichtiges, abhängigkeitsfreies Tabellensystem, das für responsive Webanwendungen entwickelt wurde. Es nutzt Bootstrap (Version 5.3 oder höher), um eine nahtlose Integration in Ihr Projekt zu ermöglichen. Wenn der Breakpoint der Tabelle erreicht wird, werden die Zeilen und Spalten übereinander gestapelt, um eine leicht lesbare Ansicht zu erstellen.
 
@@ -22,7 +22,7 @@ AvalynxTable ist ein leichtgewichtiges, abhängigkeitsfreies Tabellensystem, das
 - **Stacked-Sortiersteuerung**: In der gestapelten Ansicht werden automatisch mobile Sortierbuttons eingeblendet.
 - **Anpassbare Sprache und Button-Klassen**: Beschriftungen und CSS-Klassen für Sortierbuttons sind konfigurierbar.
 
-## Beispiel
+## Beispiele
 
 Hier ist ein einfaches Beispiel für die Verwendung von AvalynxTable in Ihrem Projekt:
 
@@ -58,8 +58,8 @@ Ersetzen Sie `path/to/avalynx-table.js` und `path/to/avalynx-table.css` durch de
 AvalynxTable ist auch über [jsDelivr](https://www.jsdelivr.com/) verfügbar. Sie können es wie folgt in Ihr Projekt einbinden:
 
 ```html
-<link href="https://cdn.jsdelivr.net/npm/avalynx-table@1.0.3/dist/css/avalynx-table.min.css" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/avalynx-table@1.0.3/dist/js/avalynx-table.min.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/avalynx-table@1.0.4/dist/css/avalynx-table.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/avalynx-table@1.0.4/dist/js/avalynx-table.min.js"></script>
 ```
 
 Stellen Sie sicher, dass Sie auch das JS/CSS von Bootstrap in Ihr Projekt einbinden, um eine korrekte Anzeige von AvalynxTable zu gewährleisten.
@@ -269,9 +269,9 @@ new AvalynxTable('.avalynx-table', {}, {
 });
 ```
 
-## Mitwirken
+## Beitragen
 
-Beiträge sind willkommen! Wenn Sie einen Beitrag leisten möchten, forken Sie bitte das Repository und senden Sie einen Pull-Request mit Ihren Änderungen oder Verbesserungen. Wir suchen nach Beiträgen in den folgenden Bereichen:
+Beiträge sind willkommen! Wenn Sie etwas beitragen möchten, forken Sie bitte das Repository und senden Sie einen Pull-Request mit Ihren Änderungen oder Verbesserungen. Wir suchen Beiträge in den folgenden Bereichen:
 
 - Fehlerbehebungen (Bug fixes)
 - Funktionserweiterungen
@@ -285,6 +285,6 @@ AvalynxTable ist eine quelloffene Software, die unter der [MIT-Lizenz](LICENSE) 
 
 ## Kontakt
 
-Wenn Sie Fragen, Funktionswünsche oder Probleme haben, eröffnen Sie bitte ein Issue in unserem [GitHub-Repository](https://github.com/avalynx/avalynx-table/issues) oder senden Sie einen Pull-Request.
+Wenn Sie Fragen, Funktionswünsche oder Probleme haben, eröffnen Sie bitte ein Issue in unserem [GitHub-Repository](https://github.com/avalynx/avalynx-table/issues) oder reichen Sie einen Pull-Request ein.
 
 Vielen Dank, dass Sie AvalynxTable für Ihr Projekt in Betracht ziehen!

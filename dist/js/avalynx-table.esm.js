@@ -1,9 +1,9 @@
 /**
  * AvalynxTable
  *
- * A simple table system for web applications. Based on Bootstrap >=5.3 without any framework dependencies.
+ * AvalynxTable is a simple table system for web applications. Based on Bootstrap >=5.3 without any framework dependencies.
  *
- * @version 1.0.3
+ * @version 1.0.4
  * @license MIT
  * @author https://github.com/avalynx/avalynx-table/graphs/contributors
  * @website https://github.com/avalynx/
@@ -11,13 +11,19 @@
  * @bugs https://github.com/avalynx/avalynx-table/issues
  *
  * @param {string} selector - The selector to use for targeting tables within the DOM (default: '.avalynx-table').
- * @param {object} options - An object containing optional keys:
- * @param {array<number|string>} options.sortableColumns - List of sortable columns. Supports index, header label or data-avalynx-table-sort-id (default: all columns).
- * @param {array<{column:number|string,dir:string}>} options.sorting - Initial sorting order, e.g. [{ column: 'name', dir: 'asc' }] (default: []).
+ * @param {object} options - An object containing the following keys:
+ * @param {Array.<number|string>} options.sortableColumns - List of sortable columns. Supports index, header label or data-avalynx-table-sort-id (default: all columns).
+ * @param {Array.<{column:number|string,dir:string}>} options.sorting - Initial sorting order, e.g. [{ column: 'name', dir: 'asc' }] (default: []).
  * @param {boolean} options.stackedSorter - Shows sorting controls in stacked mode (default: true).
  * @param {boolean} options.stackedMultiSortToggle - Shows multi-sort toggle in stacked mode (default: true).
- * @param {object} options.buttonClasses - Class names for stacked control buttons.
- * @param {object} language - Override labels/texts for stacked controls.
+ * @param {object} options.buttonClasses - Class names for stacked control buttons (default: {multiSortInactive: 'btn btn-sm btn-outline-secondary', multiSortActive: 'btn btn-sm btn-secondary', sortButtonInactive: 'btn btn-sm btn-outline-primary', sortButtonActive: 'btn btn-sm btn-primary'}).
+ *
+ * @param {object} language - An object containing the following keys:
+ * @param {string} language.sortByLabel - The label for the sort-by control (default: 'Sort by').
+ * @param {string} language.multiSortLabel - The label for the multi-sort control (default: 'Multi-sort').
+ * @param {string} language.multiSortOnLabel - The label for the multi-sort on state (default: 'on').
+ * @param {string} language.multiSortOffLabel - The label for the multi-sort off state (default: 'off').
+ * @param {string} language.columnLabel - The label for the column selection (default: 'Column').
  *
  */
 

@@ -1,12 +1,14 @@
 # AvalynxTable
 
-[![npm version](https://img.shields.io/npm/v/avalynx-table)](https://www.npmjs.com/package/avalynx-table)
-[![npm downloads](https://img.shields.io/npm/dt/avalynx-table)](https://www.npmjs.com/package/avalynx-table)
-[![jsDelivr](https://img.shields.io/jsdelivr/npm/hm/avalynx-table)](https://www.jsdelivr.com/package/npm/avalynx-table)
-[![License](https://img.shields.io/npm/l/avalynx-table)](LICENSE)
-[![Tests](https://github.com/avalynx/avalynx-table/actions/workflows/tests.yml/badge.svg?branch=main)](https://github.com/avalynx/avalynx-table/actions/workflows/tests.yml)
-[![codecov](https://codecov.io/gh/avalynx/avalynx-table/branch/main/graph/badge.svg)](https://codecov.io/gh/avalynx/avalynx-table)
-[![GitHub stars](https://img.shields.io/github/stars/avalynx/avalynx-table?style=flat&logo=github)](https://github.com/avalynx/avalynx-table)
+[![npm version](https://jbs-newmedia.de/badge/npm/avalynx-table/version.svg)](https://www.npmjs.com/package/avalynx-table)
+[![npm downloads](https://jbs-newmedia.de/badge/npm/avalynx-table/download.svg)](https://www.npmjs.com/package/avalynx-table)
+[![Composer version](https://jbs-newmedia.de/badge/composer/avalynx/avalynx-table/version.svg)](https://packagist.org/packages/avalynx/avalynx-table)
+[![Composer downloads](https://jbs-newmedia.de/badge/composer/avalynx/avalynx-table/download.svg)](https://packagist.org/packages/avalynx/avalynx-table)
+[![jsDelivr](https://jbs-newmedia.de/badge/jsdelivr/avalynx-table/hits.svg)](https://www.jsdelivr.com/package/npm/avalynx-table)
+[![License](https://jbs-newmedia.de/badge/npm/avalynx-table/license.svg)](LICENSE)
+[![Tests](https://jbs-newmedia.de/badge/github/avalynx/avalynx-table/tests.svg)](https://github.com/avalynx/avalynx-table/actions/workflows/tests.yml)
+[![codecov](https://jbs-newmedia.de/badge/codecov/avalynx/avalynx-table/coverage.svg)](https://codecov.io/gh/avalynx/avalynx-table)
+[![GitHub stars](https://jbs-newmedia.de/badge/github/avalynx/avalynx-table/stars.svg)](https://github.com/avalynx/avalynx-table)
 
 AvalynxTable is a lightweight, dependency-free table system designed for responsive web applications. It leverages Bootstrap (version 5.3 or higher) to provide a seamless integration with your project. When the table's breakpoint is reached, the rows and columns stack on top of each other to create an easily readable view.
 
@@ -22,7 +24,7 @@ AvalynxTable is a lightweight, dependency-free table system designed for respons
 - **Stacked Sort Controls**: In stacked view, mobile-friendly sorting buttons are rendered automatically.
 - **Language and Button Class Overrides**: Customize sorting labels and stacked control button classes.
 
-## Example
+## Examples
 
 Here's a simple example of how to use AvalynxTable in your project:
 
@@ -58,8 +60,8 @@ Replace `path/to/avalynx-table.js` and `path/to/avalynx-table.css` with the actu
 AvalynxTable is also available via [jsDelivr](https://www.jsdelivr.com/). You can include it in your project like this:
 
 ```html
-<link href="https://cdn.jsdelivr.net/npm/avalynx-table@1.0.3/dist/css/avalynx-table.min.css" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/avalynx-table@1.0.3/dist/js/avalynx-table.min.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/avalynx-table@1.0.4/dist/css/avalynx-table.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/avalynx-table@1.0.4/dist/js/avalynx-table.min.js"></script>
 ```
 
 Make sure to also include Bootstrap's JS/CSS in your project to ensure AvalynxTable displays correctly.
